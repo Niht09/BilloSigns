@@ -35,7 +35,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=5.1">
 
   <!-- ═══════════════════════════════════════
        SCHEMA MARKUP
@@ -130,7 +130,6 @@
       <!-- Logo -->
       <a href="#" class="nav-logo" aria-label="Billo Signs Home">
         <span class="logo-text">BILLO<span class="logo-dot">.</span>SIGNS</span>
-        <span class="logo-sub">&amp; Graphics</span>
       </a>
 
       <!-- Desktop Nav -->
@@ -988,8 +987,8 @@
             <!-- Body -->
             <div class="funnel-body">
 
-              <!-- Step 1: Service -->
-              <div class="funnel-step active" id="fStep1" data-step="1">
+              <!-- Step 1: Service — visible by default, no CSS class needed -->
+              <div class="funnel-step" id="fStep1" data-step="1">
                 <p class="funnel-hint">Pick the one that fits best — we handle all of them.</p>
                 <div class="funnel-options" id="serviceOptions" role="group" aria-label="Select a service">
                   <button class="funnel-opt" type="button" data-value="Channel Letters / LED Signs">
@@ -1019,8 +1018,8 @@
                 </div>
               </div>
 
-              <!-- Step 2: Budget -->
-              <div class="funnel-step" id="fStep2" data-step="2">
+              <!-- Step 2: Budget — hidden by inline style, JS controls all transitions -->
+              <div class="funnel-step" id="fStep2" data-step="2" style="display:none">
                 <p class="funnel-hint">Helps us recommend the right solution straight away.</p>
                 <div class="funnel-options" id="budgetOptions" role="group" aria-label="Select a budget range">
                   <button class="funnel-opt" type="button" data-value="Under $500">
@@ -1046,8 +1045,8 @@
                 </div>
               </div>
 
-              <!-- Step 3: Contact Form (Web3Forms) -->
-              <div class="funnel-step" id="fStep3" data-step="3">
+              <!-- Step 3: Contact Form — hidden by inline style, JS controls all transitions -->
+              <div class="funnel-step" id="fStep3" data-step="3" style="display:none">
                 <div class="funnel-summary" id="funnelSummary" aria-live="polite"></div>
                 <form
                   id="quoteForm"
@@ -1249,7 +1248,6 @@
         <div class="footer-brand">
           <a href="#" class="footer-logo-link" aria-label="Billo Signs Home">
             <span class="footer-logo-text">BILLO<span class="footer-logo-dot">.</span>SIGNS</span>
-            <span class="footer-logo-sub">&amp; Graphics</span>
           </a>
           <p class="footer-desc">
             Your local sign company in Edmonton, Alberta. Fast, clear, reliable signage and print for growing businesses across Alberta — delivered right the first time.
@@ -1333,7 +1331,7 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/script.js" defer></script>
+  <script src="js/script.js?v=5.1" defer></script>
 
 </body>
 </html>

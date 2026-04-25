@@ -290,32 +290,45 @@ function initFunnel() {
       setTimeout(() => goToStep(3), 260);
     });
   });
+
+  // Safety: always explicitly initialise step 1 so it can never start hidden
+  goToStep(1);
 }
 
 /**
- * Transition to a numbered step
+ * Transition to a numbered step.
+ *
+ * Uses element.style.setProperty('display', value, 'important') — this sets
+ * an inline style with !important priority, which beats every stylesheet rule
+ * including cached CSS. This is the only fully reliable cross-browser approach
+ * when CSS caching is unpredictable (e.g. GitHub Pages CDN).
  */
 function goToStep(n) {
   FunnelState.step = n;
   const copy = FUNNEL_COPY[n] || FUNNEL_COPY[CONFIG.FUNNEL_STEPS];
 
-  // Update progress bar and labels
+  // Update progress bar
   if (FunnelUI.progressBar) {
     FunnelUI.progressBar.style.width = copy.progress;
     FunnelUI.progressBar.parentElement.setAttribute('aria-valuenow',
       parseInt(copy.progress, 10)
     );
   }
+
+  // Update labels
   if (FunnelUI.title)     FunnelUI.title.textContent     = copy.title;
   if (FunnelUI.stepLabel) FunnelUI.stepLabel.textContent = copy.label;
 
-  // Show the right step panel
+  // Show/hide steps using inline style — overrides ALL stylesheet rules
   const steps = [FunnelUI.step1, FunnelUI.step2, FunnelUI.step3];
   steps.forEach((s, i) => {
     if (!s) return;
     const isActive = (i + 1 === n);
+    // setProperty with 'important' flag wins over any !important in CSS too
+    s.style.setProperty('display', isActive ? 'block' : 'none', 'important');
     s.classList.toggle('active', isActive);
-    s.hidden = !isActive;
+    // Remove any hidden attribute that may survive from HTML parsing
+    if (isActive) s.removeAttribute('hidden');
   });
 }
 
