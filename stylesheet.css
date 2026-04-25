@@ -1,88 +1,43 @@
-body {
-  font-family: Arial;
-  margin:0;
-}
-
-.hero {
-  padding:60px 20px;
-  text-align:center;
-}
-
-.btn {
-  display:block;
-  margin:10px 0;
-  padding:14px;
-  text-align:center;
-}
-
-.btn-gold {
-  background:#c7a86a;
-  color:white;
-}
-
-.section {
-  padding:60px 20px;
-}
-
-.portfolio-grid {
-  display:grid;
-  gap:20px;
-}
-
-.card {
-  background:#fff;
-  padding:10px;
-}
+body { font-family: Arial; margin:0; }
 
 /* NAV */
-.nav {
-  display:flex;
-  justify-content:space-between;
-  padding:15px;
-}
+.nav { display:flex; justify-content:space-between; padding:15px; }
+.nav-links a { margin:0 10px; }
+.mobile-nav { display:none; }
+.mobile-nav.open { display:block; }
 
-/* MOBILE NAV */
-.mobile-nav {
-  display:none;
-}
+/* HERO */
+.hero { text-align:center; padding:60px; background:#111; color:#fff; }
 
-.mobile-nav.open {
-  display:block;
-}
+.btn { display:block; padding:14px; margin:10px; text-align:center; }
+.btn-gold { background:#c7a86a; color:#fff; }
+.btn-wa { background:#25D366; color:#fff; }
 
-/* STICKY BAR */
-.sticky-bar {
-  position:fixed;
-  bottom:0;
-  width:100%;
-  display:flex;
-  background:#000;
-}
+/* SECTION */
+.section { padding:60px 20px; }
 
-.sticky-bar a {
-  flex:1;
-  color:white;
-  padding:12px;
-  text-align:center;
-}
+/* GRID */
+.grid { display:grid; grid-template-columns:1fr; gap:20px; }
+.card { background:#f5f5f5; padding:20px; }
 
-/* WHATSAPP FLOAT */
+/* PORTFOLIO */
+.portfolio-grid { display:grid; gap:20px; }
+.portfolio-card img { width:100%; }
+
+/* FUNNEL */
+.progress-wrap { height:6px; background:#eee; }
+#progressBar { height:100%; width:33%; background:#c7a86a; }
+
+/* STICKY */
+.sticky { position:fixed; bottom:0; width:100%; display:flex; }
+.sticky a { flex:1; text-align:center; padding:10px; background:#000; color:#fff; }
+
+/* WHATSAPP */
 .wa-float {
   position:fixed;
-  bottom:80px;
   right:20px;
+  bottom:80px;
   background:#25D366;
   padding:15px;
   border-radius:50%;
-}
-
-/* PROGRESS */
-.progress-wrap {
-  background:#eee;
-  height:6px;
-}
-.progress-bar {
-  width:33%;
-  height:100%;
-  background:#c7a86a;
 }

@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sign Shop Edmonton | Billo Signs</title>
+<meta name="description" content="Custom signage in Edmonton & Alberta. Fast, clear, done right.">
 
 <link rel="stylesheet" href="stylesheet.css">
 <script defer src="script.js"></script>
@@ -11,48 +13,87 @@
 
 <body>
 
-<!-- NAVBAR -->
-<header class="nav">
-  <div class="logo">BILLO SIGNS</div>
+<!-- NAV -->
+<nav class="nav">
+  <div class="logo">BILLO<span>.</span>SIGNS</div>
+
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#quote" class="nav-cta">Get Quote</a>
+  </div>
+
   <button id="hamBtn">☰</button>
-</header>
+</nav>
 
 <div class="mobile-nav" id="mobileNav">
   <a href="#services">Services</a>
   <a href="#portfolio">Portfolio</a>
-  <a href="#quick-quote">Get Quote</a>
+  <a href="#quote">Get Quote</a>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <h1>Sign Shop Edmonton — Get Your Business Noticed</h1>
-  <p>Fast, reliable signage without delays or confusion.</p>
+  <p>Fast. Clear. Done Right.</p>
 
   <div class="hero-ctas">
-    <a href="#quick-quote" class="btn btn-gold">Get Pricing</a>
+    <a href="#quote" class="btn btn-gold">Get Pricing</a>
     <a href="https://wa.me/15485773748" class="btn btn-wa">WhatsApp</a>
   </div>
 </section>
 
+<!-- SERVICES -->
+<section class="section" id="services">
+  <h2>Signage Services</h2>
+
+  <div class="grid">
+    <div class="card">Channel Letters</div>
+    <div class="card">Lightboxes</div>
+    <div class="card">Vehicle Wraps</div>
+    <div class="card">Window Graphics</div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="section" id="portfolio">
+  <h2>Recent Projects</h2>
+
+  <div class="portfolio-grid">
+
+    <div class="portfolio-card">
+      <img src="img1.jpg" loading="lazy">
+      <h3>Restaurant Sign</h3>
+      <p>Opened on time</p>
+    </div>
+
+    <div class="portfolio-card">
+      <img src="img2.jpg" loading="lazy">
+      <h3>Salon Branding</h3>
+      <p>More walk-ins</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- FUNNEL -->
-<section class="section" id="quick-quote">
+<section class="section" id="quote">
+
   <h2>Get Pricing in 30 Seconds</h2>
 
   <div class="progress-wrap">
-    <div class="progress-bar" id="progressBar"></div>
+    <div id="progressBar"></div>
   </div>
 
   <!-- STEP 1 -->
   <div id="step1">
-    <p>What do you need?</p>
-    <button onclick="nextStep(1,'Storefront Sign')">Storefront Sign</button>
-    <button onclick="nextStep(1,'Window Graphics')">Window Graphics</button>
+    <button onclick="nextStep(1,'Storefront')">Storefront</button>
+    <button onclick="nextStep(1,'Vehicle Wrap')">Vehicle Wrap</button>
   </div>
 
   <!-- STEP 2 -->
   <div id="step2" style="display:none;">
-    <p>Budget?</p>
-    <button onclick="nextStep(2,'$1500–$5000')">$1500–$5000</button>
+    <button onclick="nextStep(2,'$1500-$5000')">$1500–$5000</button>
     <button onclick="nextStep(2,'$5000+')">$5000+</button>
   </div>
 
@@ -66,48 +107,27 @@
   <div id="step4" style="display:none;">
     <form action="https://api.web3forms.com/submit" method="POST">
 
-      <input type="hidden" name="access_key" value="YOUR_KEY">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
       <input type="hidden" name="project" id="projectType">
       <input type="hidden" name="budget" id="budgetRange">
 
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
+      <input type="text" name="name" placeholder="Name" required>
+      <input type="tel" name="phone" placeholder="Phone" required>
 
-      <button type="submit" class="btn btn-gold">Get My Quote</button>
+      <button class="btn btn-gold">Submit</button>
     </form>
   </div>
 
 </section>
 
-<!-- PORTFOLIO -->
-<section class="section" id="portfolio">
-  <h2>Recent Projects</h2>
-
-  <div class="portfolio-grid">
-
-    <div class="card">
-      <img src="img1.jpg">
-      <h3>Restaurant Sign</h3>
-      <p>Opened on time after delays</p>
-    </div>
-
-    <div class="card">
-      <img src="img2.jpg">
-      <h3>Salon Branding</h3>
-      <p>More walk-in customers</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- STICKY CTA -->
-<div class="sticky-bar">
+<!-- STICKY -->
+<div class="sticky">
   <a href="tel:15485773748">Call</a>
-  <a href="#quick-quote">Quote</a>
+  <a href="#quote">Quote</a>
   <a href="https://wa.me/15485773748">WhatsApp</a>
 </div>
 
-<!-- FLOATING WHATSAPP -->
+<!-- FLOAT -->
 <a href="https://wa.me/15485773748" class="wa-float">💬</a>
 
 </body>
