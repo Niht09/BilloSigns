@@ -1,154 +1,200 @@
-// =========================
-// MOBILE MENU TOGGLE
-// =========================
+/* =========================
+   MOBILE MENU
+========================= */
 
-const menuToggle = document.createElement("button");
-menuToggle.classList.add("menu-toggle");
-menuToggle.innerHTML = "☰";
+const hamBtn = document.getElementById('hamBtn');
+const mobileNav = document.getElementById('mobileNav');
 
-const nav = document.querySelector(".nav");
-const header = document.querySelector(".header");
-
-header.appendChild(menuToggle);
-
-menuToggle.addEventListener("click", () => {
-  nav.classList.toggle("active");
-  menuToggle.classList.toggle("open");
+hamBtn?.addEventListener('click', () => {
+  hamBtn.classList.toggle('open');
+  mobileNav.classList.toggle('open');
 });
 
-// =========================
-// STICKY HEADER EFFECT
-// =========================
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 50) {
-    header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
-  } else {
-    header.style.boxShadow = "none";
-  }
-});
-
-// =========================
-// SMOOTH SCROLL
-// =========================
+/* =========================
+   SMOOTH SCROLL
+========================= */
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener("click", function(e) {
-    e.preventDefault();
-
-    const target = document.querySelector(this.getAttribute("href"));
-
+  anchor.addEventListener('click', function (e) {
+    const target = document.querySelector(this.getAttribute('href'));
     if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-      });
-    }
-
-    // Close mobile nav
-    nav.classList.remove("active");
-  });
-});
-
-// =========================
-// FAQ ACCORDION
-// =========================
-
-const faqs = document.querySelectorAll("#faq h3");
-
-faqs.forEach(faq => {
-  faq.addEventListener("click", () => {
-    const content = faq.nextElementSibling;
-
-    if (!content) return;
-
-    content.classList.toggle("open");
-
-    if (content.style.maxHeight) {
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth' });
     }
   });
 });
 
-// =========================
-// SCROLL ANIMATIONS
-// =========================
+/* =========================
+   FAQ ACCORDION
+========================= */
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("animate");
-    }
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.classList.toggle('open');
+    const answer = q.nextElementSibling;
+    answer.classList.toggle('open');
   });
-}, { threshold: 0.2 });
-
-document.querySelectorAll("section").forEach(section => {
-  observer.observe(section);
 });
 
-// =========================
-// FORM VALIDATION + WHATSAPP
-// =========================
+/* =========================
+   FUNNEL LOGIC
+========================= */
 
-const form = document.querySelector("form");
+let step = 1;
+let selectedService = '';
+let selectedBudget = '';
 
-form.addEventListener("submit", function(e) {
+const steps = {
+  1: document.getElementById('fStep1'),
+  2: document.getElementById('fStep2'),
+  3: document.getElementById('fStep3')
+};
 
-  const name = form.querySelector("input[name='name']").value.trim();
-  const phone = form.querySelector("input[name='phone']").value.trim();
+const progressBar = document.getElementById('fProgress');
+const stepLabel = document.getElementById('fStepLbl');
+const title = document.getElementById('fTitle');
+const summary = document.getElementById('fSummary');
 
-  if (name.length < 2) {
-    alert("Please enter a valid name.");
-    e.preventDefault();
-    return;
-  }
+function updateStepUI() {
+  Object.values(steps).forEach(s => s.classList.remove('active'));
+  steps[step].classList.add('active');
 
-  if (phone.length < 8) {
-    alert("Please enter a valid phone number.");
-    e.preventDefault();
-    return;
-  }
+  progressBar.style.width = (step * 33) + '%';
+  stepLabel.innerText = `Step ${step} of 3`;
 
-});
-
-// =========================
-// WHATSAPP DYNAMIC MESSAGE
-// =========================
-
-const whatsappBtn = document.querySelector(".btn-whatsapp");
-
-if (whatsappBtn) {
-  whatsappBtn.addEventListener("click", () => {
-
-    const message = encodeURIComponent(
-      "Hi Billo Signs, I need a quote for custom signage in Edmonton."
-    );
-
-    whatsappBtn.href = `https://wa.me/13439895043?text=${message}`;
-  });
+  if (step === 2) title.innerText = "What's your budget?";
+  if (step === 3) title.innerText = "Your details";
 }
 
-// =========================
-// STICKY MOBILE CTA INJECTION
-// =========================
+function nextStep() {
+  if (step < 3) {
+    step++;
+    updateStepUI();
+  }
+}
 
-const stickyBar = document.createElement("div");
-stickyBar.classList.add("sticky-cta");
+/* =========================
+   STEP 1 — SERVICE
+========================= */
 
-stickyBar.innerHTML = `
-  <a href="tel:+13439895043" class="call">Call</a>
-  <a href="https://wa.me/13439895043" class="whatsapp">WhatsApp</a>
-  <a href="#quote" class="quote">Quote</a>
-`;
+document.querySelectorAll('#serviceOptions .f-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#serviceOptions .f-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
 
-document.body.appendChild(stickyBar);
+    selectedService = btn.dataset.val;
+    nextStep();
+  });
+});
 
-// =========================
-// PAGE LOAD ANIMATION
-// =========================
+/* =========================
+   STEP 2 — BUDGET
+========================= */
 
-window.addEventListener("load", () => {
-  document.body.classList.add("loaded");
+document.querySelectorAll('#budgetOptions .f-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#budgetOptions .f-opt').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+
+    selectedBudget = btn.dataset.val;
+
+    summary.innerHTML = `
+      You selected: <strong>${selectedService}</strong><br>
+      Budget: <strong>${selectedBudget}</strong>
+    `;
+
+    nextStep();
+  });
+});
+
+/* =========================
+   STEP 3 — SUBMIT
+========================= */
+
+const submitBtn = document.getElementById('fSubmit');
+
+submitBtn?.addEventListener('click', () => {
+  const name = document.getElementById('fName').value;
+  const phone = document.getElementById('fPhone').value;
+
+  if (!name || !phone) {
+    alert('Please fill in all fields');
+    return;
+  }
+
+  // Populate hidden form values
+  let hiddenService = document.createElement('input');
+  hiddenService.type = 'hidden';
+  hiddenService.name = 'service';
+  hiddenService.value = selectedService;
+
+  let hiddenBudget = document.createElement('input');
+  hiddenBudget.type = 'hidden';
+  hiddenBudget.name = 'budget';
+  hiddenBudget.value = selectedBudget;
+
+  document.querySelector('form').appendChild(hiddenService);
+  document.querySelector('form').appendChild(hiddenBudget);
+
+  document.querySelector('form').submit();
+});
+
+/* =========================
+   WHATSAPP INTEGRATION
+========================= */
+
+const waBtn = document.getElementById('fWhatsApp');
+
+waBtn?.addEventListener('click', () => {
+  const name = document.getElementById('fName').value || '';
+  const phone = document.getElementById('fPhone').value || '';
+
+  const message = `
+Hi Billo Signs,
+
+I need a quote:
+
+Service: ${selectedService}
+Budget: ${selectedBudget}
+
+Name: ${name}
+Phone: ${phone}
+  `;
+
+  const encoded = encodeURIComponent(message);
+
+  window.open(`https://wa.me/13439895043?text=${encoded}`, '_blank');
+});
+
+/* =========================
+   STICKY CTA VISIBILITY
+========================= */
+
+const stickyBar = document.querySelector('.sticky-bar');
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    stickyBar.style.display = 'block';
+  } else {
+    stickyBar.style.display = 'none';
+  }
+});
+
+/* =========================
+   ANIMATION ON SCROLL
+========================= */
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+});
+
+document.querySelectorAll('.section').forEach(sec => {
+  sec.style.opacity = 0;
+  sec.style.transform = 'translateY(40px)';
+  observer.observe(sec);
 });

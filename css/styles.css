@@ -1,337 +1,326 @@
-/* =========================
-   ROOT DESIGN SYSTEM
-========================= */
+/* ===============================
+   DESIGN SYSTEM (UPGRADED)
+================================ */
 
 :root {
-  --primary: #111111;
-  --accent: #b8962e;
-  --accent-dark: #9a7d26;
-  --bg: #ffffff;
+  --white: #ffffff;
+  --black: #0f0f0f;
+  --charcoal: #1c2333;
+  --gold: #c8a94a;
+  --gold-dk: #a88a32;
+
+  --off: #f7f6f2;
+  --border: #e6e3da;
   --muted: #6b7280;
-  --border: #e5e7eb;
-  --radius: 12px;
-  --shadow: 0 8px 30px rgba(0,0,0,0.06);
-  --spacing: 8px;
-  --font-head: 'Montserrat', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+
+  --green: #25d366;
+
+  --radius: 6px;
+  --transition: all 0.25s ease;
+
+  --fh: 'Montserrat', sans-serif;
+  --fb: 'DM Sans', sans-serif;
 }
 
-/* =========================
-   RESET
-========================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ===============================
+   BASE
+================================ */
 
 body {
-  font-family: var(--font-body);
-  color: var(--primary);
-  background: var(--bg);
+  font-family: var(--fb);
+  background: var(--white);
+  color: var(--black);
   line-height: 1.6;
 }
 
-/* =========================
-   TYPOGRAPHY
-========================= */
-
-h1, h2, h3 {
-  font-family: var(--font-head);
-  font-weight: 900;
-}
-
-h1 {
-  font-size: clamp(32px, 5vw, 56px);
-}
-
-h2 {
-  font-size: clamp(26px, 3vw, 40px);
-  margin-bottom: 16px;
-}
-
-h3 {
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-p {
-  color: var(--muted);
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-section {
-  padding: 80px 6%;
-}
-
-.grid {
-  display: grid;
-  gap: 16px;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 100;
-  padding: 16px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo img {
-  height: 36px;
-}
-
-.nav {
-  display: flex;
-  gap: 24px;
-}
-
-.nav a {
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--primary);
-  transition: 0.3s;
-}
-
-.nav a:hover {
-  color: var(--accent);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn-primary:hover {
-  background: var(--accent-dark);
-}
-
-.btn-whatsapp {
-  background: #25d366;
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  text-decoration: none;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-  background: #0f172a;
-  color: #fff;
+.section {
   padding: 100px 6%;
 }
 
+.section-alt {
+  background: var(--off);
+}
+
+.section-dark {
+  background: var(--charcoal);
+}
+
+/* ===============================
+   TYPOGRAPHY (UPGRADED)
+================================ */
+
+.heading {
+  font-family: var(--fh);
+  font-weight: 900;
+  font-size: clamp(30px, 3.5vw, 44px);
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+}
+
+.section-desc {
+  font-size: 16px;
+  color: var(--muted);
+  max-width: 600px;
+  margin-bottom: 48px;
+}
+
+/* ===============================
+   NAV (PREMIUM)
+================================ */
+
+nav {
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.9);
+}
+
+.nav-links a {
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* ===============================
+   HERO (UPGRADE)
+================================ */
+
+.hero {
+  background: linear-gradient(135deg, #1c2333 0%, #0f1625 100%);
+}
+
 .hero h1 {
-  margin: 20px 0;
+  text-shadow: 0 6px 30px rgba(0,0,0,0.4);
 }
 
-.hero p {
-  color: rgba(255,255,255,0.7);
+.hero-ctas .btn {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
 }
 
-.hero-cta {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
+/* ===============================
+   BUTTONS (PREMIUM)
+================================ */
 
-.stats {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-/* =========================
-   PROBLEM / COST / SOLUTION
-========================= */
-
-.problem, .cost, .solution {
-  max-width: 900px;
-}
-
-.problem ul, .cost ul, .solution ul {
-  margin-top: 16px;
-  display: grid;
-  gap: 10px;
-}
-
-.problem li {
-  color: #b91c1c;
-}
-
-.cost {
-  background: #111;
-  color: #fff;
-}
-
-.cost li {
-  color: #fca5a5;
-}
-
-.solution li {
-  color: #047857;
-}
-
-/* =========================
-   SERVICES
-========================= */
-
-#services .grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-#services .grid div {
-  padding: 24px;
-  background: #fff;
+.btn {
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
-#services .grid div:hover {
-  transform: translateY(-5px);
+.btn:hover {
+  transform: translateY(-2px);
 }
 
-/* =========================
-   PRINT / DESIGN SERVICES
-========================= */
-
-section ul {
-  display: grid;
-  gap: 10px;
+.btn-gold {
+  box-shadow: 0 6px 20px rgba(200,169,74,0.3);
 }
 
-/* =========================
-   PROCESS
-========================= */
+/* ===============================
+   PROOF STRIP
+================================ */
 
-#process ol {
-  display: grid;
-  gap: 20px;
+.proof {
+  box-shadow: inset 0 -1px 0 var(--border);
 }
 
-/* =========================
-   FORM
-========================= */
+.proof-stat {
+  transition: var(--transition);
+}
 
-form {
-  display: grid;
+.proof-stat:hover {
+  transform: translateY(-4px);
+}
+
+/* ===============================
+   CARDS (GLOBAL SYSTEM)
+================================ */
+
+.svc-card,
+.switch-card,
+.sol-item,
+.testi-card {
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.svc-card:hover,
+.switch-card:hover,
+.sol-item:hover,
+.testi-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* ===============================
+   GRID IMPROVEMENTS
+================================ */
+
+.svc-grid {
   gap: 12px;
-  max-width: 400px;
 }
 
-input {
-  padding: 14px;
+.switch-grid {
+  gap: 12px;
+}
+
+.sol-grid {
+  gap: 12px;
+}
+
+/* ===============================
+   PRINT & DESIGN SECTION
+================================ */
+
+#print-design .svc-card {
   border: 1px solid var(--border);
-  border-radius: var(--radius);
 }
 
-button {
-  padding: 14px;
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  border-radius: var(--radius);
-  cursor: pointer;
+#print-design .svc-card:hover {
+  border-color: var(--gold);
 }
 
-/* =========================
+/* ===============================
+   PROCESS (PREMIUM)
+================================ */
+
+.step {
+  position: relative;
+}
+
+.step::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--gold);
+  opacity: 0.2;
+}
+
+/* ===============================
+   PORTFOLIO (MODERN)
+================================ */
+
+.port-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.port-item:hover img {
+  transform: scale(1.08);
+}
+
+.port-overlay {
+  backdrop-filter: blur(4px);
+}
+
+/* ===============================
+   TESTIMONIALS
+================================ */
+
+.testi-card {
+  background: var(--white);
+}
+
+.testi-card:hover {
+  border-color: var(--gold);
+}
+
+/* ===============================
+   FUNNEL (CRO BOOST)
+================================ */
+
+.funnel-box {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.f-opt {
+  transition: var(--transition);
+}
+
+.f-opt:hover {
+  transform: scale(1.02);
+}
+
+/* ===============================
    FAQ
-========================= */
+================================ */
 
-#faq {
-  max-width: 800px;
+.faq-q {
+  transition: var(--transition);
 }
 
-/* =========================
+.faq-q:hover {
+  background: var(--off);
+}
+
+/* ===============================
    FOOTER
-========================= */
+================================ */
 
 footer {
-  background: #111;
-  color: #fff;
-  padding: 40px 6%;
+  background: linear-gradient(135deg, #1c2333 0%, #0f1625 100%);
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ===============================
+   MOBILE OPTIMIZATION
+================================ */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-  .nav {
-    display: none;
-  }
-
-  section {
+  .section {
     padding: 60px 5%;
   }
 
-  .hero {
-    padding: 60px 5%;
+  .hero h1 {
+    font-size: 28px;
   }
 
-  .hero-cta {
-    flex-direction: column;
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .svc-grid,
+  .switch-grid,
+  .sol-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .port-grid {
+    grid-template-columns: 1fr 1fr;
   }
 
 }
 
-/* =========================
-   STICKY MOBILE CTA
-========================= */
+/* ===============================
+   MICRO ANIMATIONS
+================================ */
 
-.sticky-cta {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  z-index: 999;
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.sticky-cta a {
-  flex: 1;
-  padding: 12px;
-  text-align: center;
-  color: #fff;
-}
-
-.sticky-cta .call {
-  background: #111;
-}
-
-.sticky-cta .whatsapp {
-  background: #25d366;
-}
-
-.sticky-cta .quote {
-  background: var(--accent);
+.section {
+  animation: fadeUp 0.6s ease;
 }
