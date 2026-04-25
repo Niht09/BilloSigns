@@ -1,339 +1,337 @@
 /* =========================
-   RESET & BASE
+   ROOT DESIGN SYSTEM
 ========================= */
-*,
-*::before,
-*::after {
+
+:root {
+  --primary: #111111;
+  --accent: #b8962e;
+  --accent-dark: #9a7d26;
+  --bg: #ffffff;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+  --spacing: 8px;
+  --font-head: 'Montserrat', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* =========================
+   RESET
+========================= */
+
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: 'DM Sans', sans-serif;
-  color: #111;
-  background: #fff;
+  font-family: var(--font-body);
+  color: var(--primary);
+  background: var(--bg);
   line-height: 1.6;
 }
 
 /* =========================
-   DESIGN SYSTEM
+   TYPOGRAPHY
 ========================= */
-:root {
-  --primary: #B8962E;
-  --primary-dark: #9A7D26;
-  --black: #111111;
-  --charcoal: #1C2333;
-  --light: #F5F3EE;
-  --border: #E0DDD5;
-  --text-muted: #6B7280;
-  --green: #25D366;
-}
 
-/* Typography */
 h1, h2, h3 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--font-head);
   font-weight: 900;
-  letter-spacing: -0.5px;
 }
 
-h1 { font-size: clamp(28px, 5vw, 56px); }
-h2 { font-size: clamp(24px, 3vw, 40px); margin-bottom: 16px; }
-h3 { font-size: 18px; margin-bottom: 8px; }
+h1 {
+  font-size: clamp(32px, 5vw, 56px);
+}
+
+h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
 
 p {
-  font-size: 15px;
-  color: var(--text-muted);
-}
-
-/* Layout */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.section {
-  padding: 80px 0;
+  color: var(--muted);
 }
 
 /* =========================
-   BUTTONS
+   LAYOUT
 ========================= */
-.btn-primary {
-  background: var(--primary);
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 4px;
-  text-decoration: none;
-  display: inline-block;
-  transition: 0.3s;
+
+section {
+  padding: 80px 6%;
 }
 
-.btn-primary:hover {
-  background: var(--primary-dark);
-}
-
-.btn-secondary {
-  border: 1px solid #fff;
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 4px;
-  text-decoration: none;
+.grid {
+  display: grid;
+  gap: 16px;
 }
 
 /* =========================
    HEADER
 ========================= */
+
 .header {
   position: sticky;
   top: 0;
   background: #fff;
-  z-index: 999;
+  z-index: 100;
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid var(--border);
+}
+
+.logo img {
+  height: 36px;
 }
 
 .nav {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 70px;
-}
-
-.logo {
-  font-weight: 900;
-  font-size: 20px;
-  text-decoration: none;
-  color: #000;
-}
-
-.logo span {
-  color: var(--primary);
-}
-
-.nav-links {
-  display: flex;
   gap: 24px;
-  list-style: none;
 }
 
-.nav-links a {
+.nav a {
   text-decoration: none;
-  color: #000;
-  font-size: 14px;
+  font-weight: 500;
+  color: var(--primary);
+  transition: 0.3s;
 }
 
-.hamburger {
-  display: none;
-  font-size: 22px;
-  background: none;
-  border: none;
+.nav a:hover {
+  color: var(--accent);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
 }
 
 /* =========================
    HERO
 ========================= */
+
 .hero {
-  background: var(--charcoal);
+  background: #0f172a;
   color: #fff;
-  padding: 100px 0;
+  padding: 100px 6%;
 }
 
-.hero .eyebrow {
-  color: var(--primary);
-  font-size: 12px;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-
-.hero .subtext {
+.hero h1 {
   margin: 20px 0;
+}
+
+.hero p {
   color: rgba(255,255,255,0.7);
 }
 
 .hero-cta {
-  margin-top: 20px;
+  margin-top: 24px;
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.trust {
-  margin-top: 20px;
-  font-size: 13px;
+.stats {
+  margin-top: 24px;
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  opacity: 0.8;
 }
 
 /* =========================
-   PROBLEM / PAIN
+   PROBLEM / COST / SOLUTION
 ========================= */
-.problem-list {
-  margin-top: 20px;
-  list-style: none;
+
+.problem, .cost, .solution {
+  max-width: 900px;
 }
 
-.problem-list li {
-  padding: 8px 0;
-}
-
-.pain-grid {
+.problem ul, .cost ul, .solution ul {
+  margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 30px;
+  gap: 10px;
 }
 
-/* =========================
-   SOLUTION
-========================= */
-.solution-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 30px;
+.problem li {
+  color: #b91c1c;
+}
+
+.cost {
+  background: #111;
+  color: #fff;
+}
+
+.cost li {
+  color: #fca5a5;
+}
+
+.solution li {
+  color: #047857;
 }
 
 /* =========================
    SERVICES
 ========================= */
-.service-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 40px;
+
+#services .grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
-.card {
-  padding: 25px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+#services .grid div {
+  padding: 24px;
   background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   transition: 0.3s;
 }
 
-.card:hover {
+#services .grid div:hover {
   transform: translateY(-5px);
-  border-color: var(--primary);
+}
+
+/* =========================
+   PRINT / DESIGN SERVICES
+========================= */
+
+section ul {
+  display: grid;
+  gap: 10px;
 }
 
 /* =========================
    PROCESS
 ========================= */
-.steps {
+
+#process ol {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-  margin-top: 40px;
-}
-
-.step {
-  padding: 20px;
-  border: 1px solid var(--border);
-}
-
-/* =========================
-   TRUST
-========================= */
-.stats {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+  gap: 20px;
 }
 
 /* =========================
    FORM
 ========================= */
+
 form {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 12px;
+  max-width: 400px;
 }
 
-input, textarea {
-  padding: 12px;
+input {
+  padding: 14px;
   border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 14px;
+  border-radius: var(--radius);
 }
 
-textarea {
-  min-height: 100px;
+button {
+  padding: 14px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  cursor: pointer;
 }
 
 /* =========================
    FAQ
 ========================= */
-.faq-item {
-  border-bottom: 1px solid var(--border);
-  padding: 15px 0;
+
+#faq {
+  max-width: 800px;
 }
 
 /* =========================
    FOOTER
 ========================= */
-.footer {
-  background: var(--charcoal);
-  color: #fff;
-  padding: 40px 0;
-  text-align: center;
-}
 
-.footer p {
-  color: rgba(255,255,255,0.6);
-}
-
-/* =========================
-   FLOATING WHATSAPP
-========================= */
-.floating-wa {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: var(--green);
+footer {
+  background: #111;
   color: #fff;
-  padding: 12px 16px;
-  border-radius: 50px;
-  text-decoration: none;
+  padding: 40px 6%;
 }
 
 /* =========================
    MOBILE
 ========================= */
-@media (max-width: 768px) {
 
-  .nav-links {
+@media(max-width:768px){
+
+  .nav {
     display: none;
   }
 
-  .hamburger {
-    display: block;
+  section {
+    padding: 60px 5%;
+  }
+
+  .hero {
+    padding: 60px 5%;
   }
 
   .hero-cta {
     flex-direction: column;
   }
 
-  .service-grid {
-    grid-template-columns: 1fr;
-  }
+}
 
-  .pain-grid,
-  .solution-grid {
-    grid-template-columns: 1fr;
-  }
+/* =========================
+   STICKY MOBILE CTA
+========================= */
 
-  .steps {
-    grid-template-columns: 1fr;
-  }
+.sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  z-index: 999;
+}
 
-  .stats {
-    flex-direction: column;
-    gap: 10px;
-  }
+.sticky-cta a {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+}
 
+.sticky-cta .call {
+  background: #111;
+}
+
+.sticky-cta .whatsapp {
+  background: #25d366;
+}
+
+.sticky-cta .quote {
+  background: var(--accent);
 }

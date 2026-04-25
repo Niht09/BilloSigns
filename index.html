@@ -1,337 +1,226 @@
-/* =========================
-   ROOT DESIGN SYSTEM
-========================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-:root {
-  --primary: #111111;
-  --accent: #b8962e;
-  --accent-dark: #9a7d26;
-  --bg: #ffffff;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --radius: 12px;
-  --shadow: 0 8px 30px rgba(0,0,0,0.06);
-  --spacing: 8px;
-  --font-head: 'Montserrat', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
+<title>Sign Shop Edmonton Alberta | Custom Signs, Printing & Installation | Billo Signs</title>
+
+<meta name="description" content="Billo Signs is a leading sign shop in Edmonton Alberta offering custom signs, business signs, large format printing, graphic design, and sign installation across Alberta.">
+
+<!-- SEO Keywords -->
+<meta name="keywords" content="
+sign shop Edmonton,
+custom signs Edmonton,
+business signs Edmonton,
+large format printing Edmonton,
+graphic design Edmonton,
+business cards Edmonton,
+colour copies Edmonton,
+sign company Edmonton Alberta,
+Edmonton sign installation
+">
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "LocalBusiness",
+ "name": "Billo Signs",
+ "address": {
+   "@type": "PostalAddress",
+   "addressLocality": "Edmonton",
+   "addressRegion": "AB",
+   "addressCountry": "Canada"
+ },
+ "areaServed": "Alberta",
+ "description": "Custom signage, printing and installation services in Edmonton Alberta.",
+ "serviceType": [
+   "Custom Signs",
+   "Business Signs",
+   "Large Format Printing",
+   "Graphic Design",
+   "Sign Installation"
+ ]
 }
-
-/* =========================
-   RESET
-========================= */
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: var(--font-body);
-  color: var(--primary);
-  background: var(--bg);
-  line-height: 1.6;
-}
-
-/* =========================
-   TYPOGRAPHY
-========================= */
-
-h1, h2, h3 {
-  font-family: var(--font-head);
-  font-weight: 900;
-}
-
-h1 {
-  font-size: clamp(32px, 5vw, 56px);
-}
-
-h2 {
-  font-size: clamp(26px, 3vw, 40px);
-  margin-bottom: 16px;
-}
-
-h3 {
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-p {
-  color: var(--muted);
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-section {
-  padding: 80px 6%;
-}
-
-.grid {
-  display: grid;
-  gap: 16px;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  z-index: 100;
-  padding: 16px 6%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--border);
-}
-
-.logo img {
-  height: 36px;
-}
-
-.nav {
-  display: flex;
-  gap: 24px;
-}
-
-.nav a {
-  text-decoration: none;
-  font-weight: 500;
-  color: var(--primary);
-  transition: 0.3s;
-}
-
-.nav a:hover {
-  color: var(--accent);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn-primary {
-  background: var(--accent);
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn-primary:hover {
-  background: var(--accent-dark);
-}
-
-.btn-whatsapp {
-  background: #25d366;
-  color: #fff;
-  padding: 14px 24px;
-  border-radius: var(--radius);
-  text-decoration: none;
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-  background: #0f172a;
-  color: #fff;
-  padding: 100px 6%;
-}
-
-.hero h1 {
-  margin: 20px 0;
-}
-
-.hero p {
-  color: rgba(255,255,255,0.7);
-}
-
-.hero-cta {
-  margin-top: 24px;
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.stats {
-  margin-top: 24px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 13px;
-  opacity: 0.8;
-}
-
-/* =========================
-   PROBLEM / COST / SOLUTION
-========================= */
-
-.problem, .cost, .solution {
-  max-width: 900px;
-}
-
-.problem ul, .cost ul, .solution ul {
-  margin-top: 16px;
-  display: grid;
-  gap: 10px;
-}
-
-.problem li {
-  color: #b91c1c;
-}
-
-.cost {
-  background: #111;
-  color: #fff;
-}
-
-.cost li {
-  color: #fca5a5;
-}
-
-.solution li {
-  color: #047857;
-}
-
-/* =========================
-   SERVICES
-========================= */
-
-#services .grid {
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-}
-
-#services .grid div {
-  padding: 24px;
-  background: #fff;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  transition: 0.3s;
-}
-
-#services .grid div:hover {
-  transform: translateY(-5px);
-}
-
-/* =========================
-   PRINT / DESIGN SERVICES
-========================= */
-
-section ul {
-  display: grid;
-  gap: 10px;
-}
-
-/* =========================
-   PROCESS
-========================= */
-
-#process ol {
-  display: grid;
-  gap: 20px;
-}
-
-/* =========================
-   FORM
-========================= */
-
-form {
-  display: grid;
-  gap: 12px;
-  max-width: 400px;
-}
-
-input {
-  padding: 14px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-}
-
-button {
-  padding: 14px;
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-
-/* =========================
-   FAQ
-========================= */
-
-#faq {
-  max-width: 800px;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-  background: #111;
-  color: #fff;
-  padding: 40px 6%;
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:768px){
-
-  .nav {
-    display: none;
-  }
-
-  section {
-    padding: 60px 5%;
-  }
-
-  .hero {
-    padding: 60px 5%;
-  }
-
-  .hero-cta {
-    flex-direction: column;
-  }
-
-}
-
-/* =========================
-   STICKY MOBILE CTA
-========================= */
-
-.sticky-cta {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  z-index: 999;
-}
-
-.sticky-cta a {
-  flex: 1;
-  padding: 12px;
-  text-align: center;
-  color: #fff;
-}
-
-.sticky-cta .call {
-  background: #111;
-}
-
-.sticky-cta .whatsapp {
-  background: #25d366;
-}
-
-.sticky-cta .quote {
-  background: var(--accent);
-}
+</script>
+
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="header">
+  <a href="#" class="logo">
+    <img src="Images/logo.svg" alt="Custom Sign Shop Edmonton Alberta - Billo Signs Logo">
+  </a>
+
+  <nav class="nav">
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#portfolio">Work</a>
+    <a href="#faq">FAQ</a>
+    <a href="#quote" class="btn-primary">Get Quote</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <h4>Sign Shop — Edmonton, Alberta</h4>
+  <h5>Fast. Clear. Done Right.</h5>
+
+  <h1>Sign Shop Edmonton — Get Your Business Noticed Without the Delays</h1>
+
+  <p>Opening a new location and need everything ready on time — without chasing vendors?</p>
+
+  <p>We design, produce, and install custom signage across Edmonton and Alberta. One team. One process. No confusion.</p>
+
+  <div class="hero-cta">
+    <a href="#quote" class="btn-primary">Get Pricing in 30 Seconds</a>
+    <a href="https://wa.me/13439895043" class="btn-whatsapp">WhatsApp</a>
+  </div>
+
+  <div class="stats">
+    <span>Response within 24 hours</span>
+    <span>No obligation</span>
+    <span>Clear pricing</span>
+    <span>50+ Projects Completed</span>
+    <span>10+ Cities Served</span>
+    <span>24h Quote Turnaround</span>
+    <span>5★ Client Rating</span>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <h2>Sound Familiar?</h2>
+  <h3>Most Sign Projects in Edmonton Don't Go the Way They Should</h3>
+
+  <ul>
+    <li>Sign isn't ready before your opening day</li>
+    <li>Design doesn't match your brand</li>
+    <li>Installer blames designer</li>
+    <li>No clear timelines</li>
+  </ul>
+</section>
+
+<!-- COST -->
+<section class="cost">
+  <h2>Every Day Without the Right Signage Costs You</h2>
+
+  <ul>
+    <li>Opening Day Missed</li>
+    <li>Weak First Impression</li>
+    <li>Wasted Time</li>
+    <li>Paying Twice</li>
+  </ul>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution">
+  <h2>The Better Way</h2>
+  <h3>Complete Signage Services in Edmonton — Done Right</h3>
+
+  <ul>
+    <li>Fast Response Times</li>
+    <li>Clear Communication</li>
+    <li>No Back-and-Forth</li>
+    <li>Consistent Quality</li>
+  </ul>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <h2>Custom Signage Services in Edmonton</h2>
+
+  <div class="grid">
+    <div>Channel Letter Signs</div>
+    <div>Lightboxes</div>
+    <div>Window Graphics</div>
+    <div>Vehicle Wraps</div>
+    <div>Lawn Signs</div>
+    <div>Interior Branding</div>
+  </div>
+</section>
+
+<!-- 🔥 NEW PRINT SERVICES -->
+<section>
+  <h2>Print Services — Edmonton</h2>
+
+  <ul>
+    <li>Business Cards</li>
+    <li>Flyers & Brochures</li>
+    <li>Postcards</li>
+    <li>Envelopes & Letterheads</li>
+    <li>Labels</li>
+    <li>Colour Copies</li>
+    <li>Bindings & Lamination</li>
+    <li>Engineering Copies</li>
+  </ul>
+</section>
+
+<!-- 🔥 NEW DESIGN SERVICES -->
+<section>
+  <h2>Design Services — Edmonton</h2>
+
+  <ul>
+    <li>Graphic Design</li>
+    <li>Website Design</li>
+    <li>Online Marketing</li>
+  </ul>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <h2>How Our Edmonton Signage Process Works</h2>
+
+  <ol>
+    <li>Request a Quote</li>
+    <li>Design & Approval</li>
+    <li>Production & Installation</li>
+  </ol>
+</section>
+
+<!-- TRUST -->
+<section>
+  <h2>Client Reviews</h2>
+  <h3>What Edmonton Businesses Say</h3>
+</section>
+
+<!-- CTA + FORM -->
+<section id="quote">
+  <h2>Get Started</h2>
+  <h3>Get Signage Done Right — The First Time</h3>
+
+  <form action="https://api.web3forms.com/submit" method="POST">
+    <input type="hidden" name="access_key" value="b589035e-a7b7-4014-a877-4188f1656184">
+
+    <input type="text" name="name" placeholder="Your Name" required>
+    <input type="tel" name="phone" placeholder="Phone" required>
+
+    <button type="submit">Get Free Quote</button>
+  </form>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+</section>
+
+<!-- SERVICE AREAS -->
+<section>
+  Edmonton · St. Albert · Sherwood Park · Spruce Grove · Leduc · Red Deer · Hinton · Edson · Jasper · Fort McMurray
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h3>BILLO.SIGNS</h3>
+  <p>Your local sign shop in Edmonton providing custom signs, printing, and installation.</p>
+</footer>
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
