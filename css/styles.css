@@ -412,14 +412,38 @@ textarea {
   flex-shrink: 0;
 }
 
-.logo-img {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
+/* ── TEXT LOGO (header) ─────────────────────────────── */
+.nav-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  text-decoration: none;
   transition: opacity var(--t-base);
 }
 
-.logo-img:hover { opacity: .85; }
+.nav-logo:hover { opacity: .82; }
+
+.logo-text {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -.5px;
+  color: var(--clr-white);
+  line-height: 1;
+}
+
+.logo-dot { color: var(--clr-gold); }
+
+.logo-sub {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  align-self: flex-end;
+  margin-bottom: 1px;
+}
 
 /* Desktop nav links */
 .desktop-nav { flex: 1; }
@@ -1751,9 +1775,11 @@ textarea {
   padding: var(--sp-4) var(--sp-5) var(--sp-5);
 }
 
-/* Funnel steps */
-.funnel-step { display: none; }
-.funnel-step.active { display: block; }
+/* Funnel steps — !important ensures CSS class wins over any HTML attribute conflicts */
+.funnel-step { display: none !important; }
+.funnel-step.active { display: block !important; }
+/* Belt-and-suspenders: active always wins even if hidden attr is present */
+.funnel-step.active[hidden] { display: block !important; }
 
 .funnel-hint {
   font-size: 13.5px;
@@ -2113,17 +2139,39 @@ textarea {
   gap: 0;
 }
 
-.footer-logo {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
+/* ── TEXT LOGO (footer) ─────────────────────────────── */
+.footer-logo-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  text-decoration: none;
   margin-bottom: var(--sp-2);
-  filter: brightness(0) invert(1);
-  opacity: .85;
   transition: opacity var(--t-base);
 }
 
-.footer-logo:hover { opacity: 1; }
+.footer-logo-link:hover { opacity: .8; }
+
+.footer-logo-text {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -.5px;
+  color: rgba(255,255,255,.85);
+  line-height: 1;
+}
+
+.footer-logo-dot { color: var(--clr-gold); }
+
+.footer-logo-sub {
+  font-family: var(--font-head);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.3);
+  align-self: flex-end;
+  margin-bottom: 1px;
+}
 
 .footer-desc {
   font-size: 13.5px;
