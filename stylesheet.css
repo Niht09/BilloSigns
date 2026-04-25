@@ -1,43 +1,73 @@
-body { font-family: Arial; margin:0; }
+:root{
+  --gold:#c7a86a;
+}
 
-/* NAV */
-.nav { display:flex; justify-content:space-between; padding:15px; }
-.nav-links a { margin:0 10px; }
-.mobile-nav { display:none; }
-.mobile-nav.open { display:block; }
+body{margin:0;font-family:Inter,Arial;}
 
-/* HERO */
-.hero { text-align:center; padding:60px; background:#111; color:#fff; }
+.nav{
+ display:flex;justify-content:space-between;
+ padding:15px 6%;position:sticky;top:0;background:#fff;
+}
 
-.btn { display:block; padding:14px; margin:10px; text-align:center; }
-.btn-gold { background:#c7a86a; color:#fff; }
-.btn-wa { background:#25D366; color:#fff; }
+.hero{
+ padding:100px 20px;text-align:center;background:#111;color:#fff;
+}
 
-/* SECTION */
-.section { padding:60px 20px; }
+.btn{
+ display:inline-block;padding:14px 20px;margin:10px;
+ border-radius:6px;text-decoration:none;
+}
 
-/* GRID */
-.grid { display:grid; grid-template-columns:1fr; gap:20px; }
-.card { background:#f5f5f5; padding:20px; }
+.btn-gold{background:var(--gold);color:#fff;}
+.btn-wa{background:#25D366;color:#fff;}
 
-/* PORTFOLIO */
-.portfolio-grid { display:grid; gap:20px; }
-.portfolio-card img { width:100%; }
+.section{padding:80px 6%;}
 
-/* FUNNEL */
-.progress-wrap { height:6px; background:#eee; }
-#progressBar { height:100%; width:33%; background:#c7a86a; }
+.grid{
+ display:grid;gap:20px;
+ grid-template-columns:1fr;
+}
 
-/* STICKY */
-.sticky { position:fixed; bottom:0; width:100%; display:flex; }
-.sticky a { flex:1; text-align:center; padding:10px; background:#000; color:#fff; }
+.card{
+ background:#f5f5f5;padding:20px;border-radius:10px;
+}
 
-/* WHATSAPP */
-.wa-float {
-  position:fixed;
-  right:20px;
-  bottom:80px;
-  background:#25D366;
-  padding:15px;
-  border-radius:50%;
+.portfolio-grid{
+ display:grid;gap:20px;
+ grid-template-columns:1fr;
+}
+
+.portfolio-card img{
+ width:100%;border-radius:10px;
+}
+
+.progress-wrap{
+ height:6px;background:#eee;margin-bottom:20px;
+}
+
+#progressBar{
+ height:100%;width:33%;background:var(--gold);
+}
+
+.sticky{
+ position:fixed;bottom:0;width:100%;
+ display:flex;
+}
+
+.sticky a{
+ flex:1;text-align:center;padding:14px;background:#000;color:#fff;
+}
+
+.wa-float{
+ position:fixed;bottom:80px;right:20px;
+ background:#25D366;padding:15px;border-radius:50%;
+}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(20px);transition:0.5s;}
+.reveal.show{opacity:1;transform:none;}
+
+@media(min-width:768px){
+ .grid{grid-template-columns:repeat(2,1fr);}
+ .portfolio-grid{grid-template-columns:repeat(2,1fr);}
 }

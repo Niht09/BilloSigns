@@ -5,26 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Sign Shop Edmonton | Billo Signs</title>
-<meta name="description" content="Custom signage in Edmonton & Alberta. Fast, clear, done right.">
+<meta name="description" content="Custom signage in Edmonton & Alberta. Fast, reliable, and premium quality signs for businesses.">
 
 <link rel="stylesheet" href="stylesheet.css">
 <script defer src="script.js"></script>
+
+<!-- SEO Schema -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "LocalBusiness",
+ "name": "Billo Signs",
+ "areaServed": "Alberta",
+ "telephone": "+1-548-577-3748"
+}
+</script>
 </head>
 
 <body>
 
 <!-- NAV -->
-<nav class="nav">
+<header class="nav">
   <div class="logo">BILLO<span>.</span>SIGNS</div>
 
-  <div class="nav-links">
+  <nav class="nav-links">
     <a href="#services">Services</a>
     <a href="#portfolio">Portfolio</a>
-    <a href="#quote" class="nav-cta">Get Quote</a>
-  </div>
+    <a href="#quote" class="cta">Get Quote</a>
+  </nav>
 
   <button id="hamBtn">☰</button>
-</nav>
+</header>
 
 <div class="mobile-nav" id="mobileNav">
   <a href="#services">Services</a>
@@ -33,81 +44,71 @@
 </div>
 
 <!-- HERO -->
-<section class="hero">
-  <h1>Sign Shop Edmonton — Get Your Business Noticed</h1>
-  <p>Fast. Clear. Done Right.</p>
+<section class="hero reveal">
+  <h1>Sign Shop Edmonton — Custom Business Signage That Gets You Noticed</h1>
+  <p>Fast turnaround. Clear communication. Done right the first time.</p>
 
   <div class="hero-ctas">
-    <a href="#quote" class="btn btn-gold">Get Pricing</a>
+    <a href="#quote" class="btn btn-gold">Get Pricing in 30 Seconds</a>
     <a href="https://wa.me/15485773748" class="btn btn-wa">WhatsApp</a>
   </div>
 </section>
 
 <!-- SERVICES -->
-<section class="section" id="services">
-  <h2>Signage Services</h2>
+<section class="section reveal" id="services">
+  <h2>Custom Signage Services</h2>
 
   <div class="grid">
     <div class="card">Channel Letters</div>
     <div class="card">Lightboxes</div>
-    <div class="card">Vehicle Wraps</div>
     <div class="card">Window Graphics</div>
+    <div class="card">Vehicle Wraps</div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section class="section" id="portfolio">
+<section class="section reveal" id="portfolio">
   <h2>Recent Projects</h2>
 
   <div class="portfolio-grid">
 
     <div class="portfolio-card">
       <img src="img1.jpg" loading="lazy">
-      <h3>Restaurant Sign</h3>
-      <p>Opened on time</p>
-    </div>
-
-    <div class="portfolio-card">
-      <img src="img2.jpg" loading="lazy">
-      <h3>Salon Branding</h3>
-      <p>More walk-ins</p>
+      <div class="portfolio-content">
+        <h3>Restaurant Sign – Edmonton</h3>
+        <p><strong>Problem:</strong> Delayed opening</p>
+        <p><strong>Result:</strong> Opened on time</p>
+      </div>
     </div>
 
   </div>
 </section>
 
 <!-- FUNNEL -->
-<section class="section" id="quote">
-
+<section class="section reveal" id="quote">
   <h2>Get Pricing in 30 Seconds</h2>
 
-  <div class="progress-wrap">
-    <div id="progressBar"></div>
-  </div>
+  <div class="progress-wrap"><div id="progressBar"></div></div>
 
-  <!-- STEP 1 -->
   <div id="step1">
     <button onclick="nextStep(1,'Storefront')">Storefront</button>
-    <button onclick="nextStep(1,'Vehicle Wrap')">Vehicle Wrap</button>
+    <button onclick="nextStep(1,'Vehicle')">Vehicle Wrap</button>
   </div>
 
-  <!-- STEP 2 -->
   <div id="step2" style="display:none;">
-    <button onclick="nextStep(2,'$1500-$5000')">$1500–$5000</button>
+    <button onclick="nextStep(2,'$1500–$5000')">$1500–$5000</button>
     <button onclick="nextStep(2,'$5000+')">$5000+</button>
   </div>
 
-  <!-- STEP 3 -->
   <div id="step3" style="display:none;">
-    <p>Estimated: <span id="estimate">$1500–$5000</span></p>
+    <p>Estimated: <span id="estimate"></span></p>
     <button onclick="nextStep(3)">Continue</button>
   </div>
 
-  <!-- FORM -->
   <div id="step4" style="display:none;">
     <form action="https://api.web3forms.com/submit" method="POST">
 
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+      <input type="hidden" name="access_key" value="YOUR_KEY">
       <input type="hidden" name="project" id="projectType">
       <input type="hidden" name="budget" id="budgetRange">
 
@@ -117,17 +118,15 @@
       <button class="btn btn-gold">Submit</button>
     </form>
   </div>
-
 </section>
 
-<!-- STICKY -->
+<!-- CTA -->
 <div class="sticky">
   <a href="tel:15485773748">Call</a>
   <a href="#quote">Quote</a>
   <a href="https://wa.me/15485773748">WhatsApp</a>
 </div>
 
-<!-- FLOAT -->
 <a href="https://wa.me/15485773748" class="wa-float">💬</a>
 
 </body>
