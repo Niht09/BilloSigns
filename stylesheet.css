@@ -1,67 +1,69 @@
-body { font-family: Arial; margin:0; }
+body {
+  font-family: Arial;
+  margin:0;
+}
 
 .hero {
-  padding:80px 20px;
+  padding:60px 20px;
   text-align:center;
 }
 
 .btn {
-  display:inline-block;
-  padding:14px;
-  margin:6px;
-  text-decoration:none;
-}
-
-.btn-gold { background:#c7a86a; color:#fff; }
-.btn-wa { background:#25D366; color:#fff; }
-
-.section { padding:60px 20px; }
-
-.quote-step button {
   display:block;
-  width:100%;
   margin:10px 0;
   padding:14px;
+  text-align:center;
 }
 
-.hidden { display:none; }
-
-/* NAV */
-.mobile-nav {
-  position:fixed;
-  top:60px;
-  left:0;
-  right:0;
-  background:#fff;
-  display:none;
+.btn-gold {
+  background:#c7a86a;
+  color:white;
 }
 
-.mobile-nav.open { display:block; }
+.section {
+  padding:60px 20px;
+}
 
-/* PORTFOLIO */
 .portfolio-grid {
   display:grid;
   gap:20px;
 }
 
-.portfolio-card {
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+.card {
+  background:#fff;
+  padding:10px;
 }
 
-/* STICKY */
+/* NAV */
+.nav {
+  display:flex;
+  justify-content:space-between;
+  padding:15px;
+}
+
+/* MOBILE NAV */
+.mobile-nav {
+  display:none;
+}
+
+.mobile-nav.open {
+  display:block;
+}
+
+/* STICKY BAR */
 .sticky-bar {
   position:fixed;
   bottom:0;
   width:100%;
   display:flex;
+  background:#000;
 }
 
 .sticky-bar a {
   flex:1;
-  padding:16px;
+  color:white;
+  padding:12px;
   text-align:center;
-  background:#000;
-  color:#fff;
 }
 
 /* WHATSAPP FLOAT */
@@ -70,7 +72,7 @@ body { font-family: Arial; margin:0; }
   bottom:80px;
   right:20px;
   background:#25D366;
-  padding:14px;
+  padding:15px;
   border-radius:50%;
 }
 
@@ -79,9 +81,8 @@ body { font-family: Arial; margin:0; }
   background:#eee;
   height:6px;
 }
-
 .progress-bar {
-  background:#c7a86a;
-  height:100%;
   width:33%;
+  height:100%;
+  background:#c7a86a;
 }

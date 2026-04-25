@@ -6,6 +6,7 @@
 <title>Sign Shop Edmonton | Billo Signs</title>
 
 <link rel="stylesheet" href="stylesheet.css">
+<script defer src="script.js"></script>
 </head>
 
 <body>
@@ -13,101 +14,87 @@
 <!-- NAVBAR -->
 <header class="nav">
   <div class="logo">BILLO SIGNS</div>
-
-  <button id="hamBtn" class="ham">☰</button>
-
-  <nav id="mobileNav" class="mobile-nav">
-    <a href="#services" class="mob-link">Services</a>
-    <a href="#portfolio" class="mob-link">Portfolio</a>
-    <a href="#quick-quote" class="mob-link">Get Quote</a>
-  </nav>
+  <button id="hamBtn">☰</button>
 </header>
 
-<div id="navOverlay" class="nav-overlay"></div>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#services">Services</a>
+  <a href="#portfolio">Portfolio</a>
+  <a href="#quick-quote">Get Quote</a>
+</div>
 
 <!-- HERO -->
 <section class="hero">
-  <h1>Sign Shop Edmonton — Get Your Business Noticed Without Delays</h1>
-  <p>Custom signage designed, built, and installed fast.</p>
+  <h1>Sign Shop Edmonton — Get Your Business Noticed</h1>
+  <p>Fast, reliable signage without delays or confusion.</p>
 
   <div class="hero-ctas">
-    <a href="#quick-quote" class="btn btn-gold">Get Pricing in 30 Seconds</a>
+    <a href="#quick-quote" class="btn btn-gold">Get Pricing</a>
     <a href="https://wa.me/15485773748" class="btn btn-wa">WhatsApp</a>
   </div>
 </section>
 
 <!-- FUNNEL -->
-<section id="quick-quote" class="section">
-  <div class="container">
+<section class="section" id="quick-quote">
+  <h2>Get Pricing in 30 Seconds</h2>
 
-    <h2>Get Pricing in 30 Seconds</h2>
-
-    <div class="progress-wrap">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
-
-    <!-- STEP 1 -->
-    <div id="step1" class="quote-step">
-      <p>What do you need?</p>
-      <button onclick="nextStep(1,'Storefront Sign')">Storefront</button>
-      <button onclick="nextStep(1,'Window Graphics')">Window</button>
-      <button onclick="nextStep(1,'Vehicle Wrap')">Vehicle</button>
-    </div>
-
-    <!-- STEP 2 -->
-    <div id="step2" class="quote-step hidden">
-      <p>Budget?</p>
-      <button onclick="nextStep(2,'500-1500')">$500–$1500</button>
-      <button onclick="nextStep(2,'1500-5000')">$1500–$5000</button>
-      <button onclick="nextStep(2,'5000+')">$5000+</button>
-    </div>
-
-    <!-- STEP 3 -->
-    <div id="step3" class="quote-step hidden">
-      <p>Estimated Pricing</p>
-      <p id="estimateText">$1500–$5000</p>
-      <button onclick="nextStep(3)">Continue</button>
-    </div>
-
-    <!-- STEP 4 -->
-    <div id="step4" class="quote-step hidden">
-      <form action="https://api.web3forms.com/submit" method="POST">
-
-        <input type="hidden" name="access_key" value="YOUR_KEY">
-
-        <input type="hidden" name="project_type" id="projectType">
-        <input type="hidden" name="budget" id="budgetRange">
-
-        <input type="text" name="name" placeholder="Name" required>
-        <input type="tel" name="phone" placeholder="Phone" required>
-
-        <button class="btn btn-gold">Get My Quote</button>
-      </form>
-    </div>
-
+  <div class="progress-wrap">
+    <div class="progress-bar" id="progressBar"></div>
   </div>
+
+  <!-- STEP 1 -->
+  <div id="step1">
+    <p>What do you need?</p>
+    <button onclick="nextStep(1,'Storefront Sign')">Storefront Sign</button>
+    <button onclick="nextStep(1,'Window Graphics')">Window Graphics</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div id="step2" style="display:none;">
+    <p>Budget?</p>
+    <button onclick="nextStep(2,'$1500–$5000')">$1500–$5000</button>
+    <button onclick="nextStep(2,'$5000+')">$5000+</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div id="step3" style="display:none;">
+    <p>Estimated: <span id="estimate">$1500–$5000</span></p>
+    <button onclick="nextStep(3)">Continue</button>
+  </div>
+
+  <!-- FORM -->
+  <div id="step4" style="display:none;">
+    <form action="https://api.web3forms.com/submit" method="POST">
+
+      <input type="hidden" name="access_key" value="YOUR_KEY">
+      <input type="hidden" name="project" id="projectType">
+      <input type="hidden" name="budget" id="budgetRange">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="tel" name="phone" placeholder="Phone / WhatsApp" required>
+
+      <button type="submit" class="btn btn-gold">Get My Quote</button>
+    </form>
+  </div>
+
 </section>
 
 <!-- PORTFOLIO -->
-<section id="portfolio" class="section reveal">
+<section class="section" id="portfolio">
   <h2>Recent Projects</h2>
 
   <div class="portfolio-grid">
 
-    <div class="portfolio-card">
-      <img src="project1.jpg" loading="lazy">
-      <div>
-        <h3>Restaurant Sign</h3>
-        <p>Opened on time with strong walk-ins.</p>
-      </div>
+    <div class="card">
+      <img src="img1.jpg">
+      <h3>Restaurant Sign</h3>
+      <p>Opened on time after delays</p>
     </div>
 
-    <div class="portfolio-card">
-      <img src="project2.jpg" loading="lazy">
-      <div>
-        <h3>Salon Branding</h3>
-        <p>Improved brand visibility instantly.</p>
-      </div>
+    <div class="card">
+      <img src="img2.jpg">
+      <h3>Salon Branding</h3>
+      <p>More walk-in customers</p>
     </div>
 
   </div>
@@ -115,13 +102,13 @@
 
 <!-- STICKY CTA -->
 <div class="sticky-bar">
-  <a href="tel:+15485773748">Call</a>
+  <a href="tel:15485773748">Call</a>
+  <a href="#quick-quote">Quote</a>
   <a href="https://wa.me/15485773748">WhatsApp</a>
 </div>
 
 <!-- FLOATING WHATSAPP -->
 <a href="https://wa.me/15485773748" class="wa-float">💬</a>
 
-<script src="script.js"></script>
 </body>
 </html>
