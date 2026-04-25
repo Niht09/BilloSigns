@@ -1,205 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =========================
+   ROOT DESIGN SYSTEM
+========================= */
 
-<title>Billo Signs | Custom Signage Edmonton & Alberta</title>
+:root {
+  --primary: #111111;
+  --accent: #b8962e;
+  --accent-dark: #9a7d26;
+  --bg: #ffffff;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 12px;
+  --shadow: 0 8px 30px rgba(0,0,0,0.06);
+  --spacing: 8px;
+  --font-head: 'Montserrat', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
 
-<meta name="description" content="Premium custom signage in Edmonton & Alberta. Channel letters, storefront signs, vehicle wraps. Fast turnaround. Free quote within 24 hours.">
+/* =========================
+   RESET
+========================= */
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-<link rel="stylesheet" href="css/styles.css">
+body {
+  font-family: var(--font-body);
+  color: var(--primary);
+  background: var(--bg);
+  line-height: 1.6;
+}
 
-</head>
-<body>
+/* =========================
+   TYPOGRAPHY
+========================= */
 
-<!-- NAV -->
-<header class="nav">
-  <div class="nav-inner">
-    
-    <!-- LOGO SVG -->
-    <div class="logo">
-      <img src="images/logo.svg" alt="Billo Signs Logo">
-    </div>
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 900;
+}
 
-    <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#process">Process</a>
-      <a href="#faq">FAQ</a>
-      <a href="#quote" class="btn primary">Get Quote</a>
-    </nav>
+h1 {
+  font-size: clamp(32px, 5vw, 56px);
+}
 
-    <button class="hamburger" id="hamburger">☰</button>
-  </div>
-</header>
+h2 {
+  font-size: clamp(26px, 3vw, 40px);
+  margin-bottom: 16px;
+}
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
+h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
 
-    <h1>
-      Premium Signage in <span>Edmonton & Alberta</span>
-    </h1>
+p {
+  color: var(--muted);
+}
 
-    <p class="hero-sub">
-      Custom signs, channel letters, wraps & branding — designed, built, and installed by one team.
-    </p>
+/* =========================
+   LAYOUT
+========================= */
 
-    <div class="hero-cta">
-      <a href="#quote" class="btn primary">Get Quote in 30s →</a>
-      <a href="https://wa.me/15485773748" class="btn whatsapp">WhatsApp</a>
-    </div>
+section {
+  padding: 80px 6%;
+}
 
-    <div class="trust">
-      <span>✔ 24h response</span>
-      <span>✔ No obligation</span>
-      <span>✔ Clear pricing</span>
-    </div>
+.grid {
+  display: grid;
+  gap: 16px;
+}
 
-  </div>
-</section>
+/* =========================
+   HEADER
+========================= */
 
-<!-- TRUST STRIP -->
-<section class="trust-strip">
-  <div class="container grid-4">
-    <div><strong>50+</strong><span>Projects</span></div>
-    <div><strong>10+</strong><span>Cities</span></div>
-    <div><strong>24h</strong><span>Quotes</span></div>
-    <div><strong>5★</strong><span>Rating</span></div>
-  </div>
-</section>
+.header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
 
-<!-- PROBLEM -->
-<section class="section">
-  <div class="container grid-2">
-    
-    <div>
-      <h2>Most Sign Projects Go Wrong</h2>
-      <ul>
-        <li>Delays before opening</li>
-        <li>No clear communication</li>
-        <li>Poor design execution</li>
-      </ul>
-    </div>
+.logo img {
+  height: 36px;
+}
 
-    <div class="card dark">
-      <h3>This costs you customers</h3>
-      <p>Bad signage = lost first impressions and missed revenue.</p>
-    </div>
+.nav {
+  display: flex;
+  gap: 24px;
+}
 
-  </div>
-</section>
+.nav a {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--primary);
+  transition: 0.3s;
+}
 
-<!-- SERVICES -->
-<section class="section alt" id="services">
-  <div class="container">
+.nav a:hover {
+  color: var(--accent);
+}
 
-    <h2>Our Signage Services</h2>
+/* =========================
+   BUTTONS
+========================= */
 
-    <div class="grid-3">
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: 0.3s;
+}
 
-      <div class="card">Channel Letters</div>
-      <div class="card">Storefront Signs</div>
-      <div class="card">Vehicle Wraps</div>
-      <div class="card">Window Graphics</div>
-      <div class="card">Lightboxes</div>
-      <div class="card">Interior Branding</div>
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
 
-    </div>
+.btn-whatsapp {
+  background: #25d366;
+  color: #fff;
+  padding: 14px 24px;
+  border-radius: var(--radius);
+  text-decoration: none;
+}
 
-  </div>
-</section>
+/* =========================
+   HERO
+========================= */
 
-<!-- PORTFOLIO -->
-<section class="section" id="portfolio">
-  <div class="container">
+.hero {
+  background: #0f172a;
+  color: #fff;
+  padding: 100px 6%;
+}
 
-    <h2>Our Work</h2>
+.hero h1 {
+  margin: 20px 0;
+}
 
-    <div class="portfolio-grid">
+.hero p {
+  color: rgba(255,255,255,0.7);
+}
 
-      <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0" alt="">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="">
-      <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c" alt="">
-      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786" alt="">
-      <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1" alt="">
-      <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0" alt="">
+.hero-cta {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
 
-    </div>
+.stats {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  opacity: 0.8;
+}
 
-  </div>
-</section>
+/* =========================
+   PROBLEM / COST / SOLUTION
+========================= */
 
-<!-- PROCESS -->
-<section class="section dark" id="process">
-  <div class="container grid-3">
+.problem, .cost, .solution {
+  max-width: 900px;
+}
 
-    <div>
-      <h3>1. Quote</h3>
-      <p>Tell us what you need</p>
-    </div>
+.problem ul, .cost ul, .solution ul {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
 
-    <div>
-      <h3>2. Design</h3>
-      <p>Approve before production</p>
-    </div>
+.problem li {
+  color: #b91c1c;
+}
 
-    <div>
-      <h3>3. Install</h3>
-      <p>Done right, on time</p>
-    </div>
+.cost {
+  background: #111;
+  color: #fff;
+}
 
-  </div>
-</section>
+.cost li {
+  color: #fca5a5;
+}
 
-<!-- FUNNEL -->
-<section class="section alt" id="quote">
-  <div class="container">
+.solution li {
+  color: #047857;
+}
 
-    <h2>Get Your Free Quote</h2>
+/* =========================
+   SERVICES
+========================= */
 
-    <form id="quoteForm">
-      <input type="text" placeholder="Your Name" required>
-      <input type="tel" placeholder="Phone" required>
-      <button class="btn primary">Submit</button>
-    </form>
+#services .grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
 
-    <a href="https://wa.me/15485773748" class="btn whatsapp full">
-      Chat on WhatsApp
-    </a>
+#services .grid div {
+  padding: 24px;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+}
 
-  </div>
-</section>
+#services .grid div:hover {
+  transform: translateY(-5px);
+}
 
-<!-- SEO LOCATIONS -->
-<section class="section">
-  <div class="container">
+/* =========================
+   PRINT / DESIGN SERVICES
+========================= */
 
-    <h2>Serving Alberta</h2>
+section ul {
+  display: grid;
+  gap: 10px;
+}
 
-    <p>
-      Edmonton, St. Albert, Sherwood Park, Spruce Grove, Leduc,
-      Red Deer, Hinton, Edson, Jasper, Fort McMurray
-    </p>
+/* =========================
+   PROCESS
+========================= */
 
-  </div>
-</section>
+#process ol {
+  display: grid;
+  gap: 20px;
+}
 
-<!-- FOOTER -->
-<footer>
-  <div class="container">
+/* =========================
+   FORM
+========================= */
 
-    <p>© Billo Signs — Edmonton</p>
-    <p>Phone: +1 548 577 3748</p>
+form {
+  display: grid;
+  gap: 12px;
+  max-width: 400px;
+}
 
-  </div>
-</footer>
+input {
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
 
-<script src="js/script.js"></script>
+button {
+  padding: 14px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
 
-</body>
-</html>
+/* =========================
+   FAQ
+========================= */
+
+#faq {
+  max-width: 800px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  background: #111;
+  color: #fff;
+  padding: 40px 6%;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+  .nav {
+    display: none;
+  }
+
+  section {
+    padding: 60px 5%;
+  }
+
+  .hero {
+    padding: 60px 5%;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+  }
+
+}
+
+/* =========================
+   STICKY MOBILE CTA
+========================= */
+
+.sticky-cta {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  z-index: 999;
+}
+
+.sticky-cta a {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  color: #fff;
+}
+
+.sticky-cta .call {
+  background: #111;
+}
+
+.sticky-cta .whatsapp {
+  background: #25d366;
+}
+
+.sticky-cta .quote {
+  background: var(--accent);
+}

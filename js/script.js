@@ -1,113 +1,154 @@
-// ==============================
-// MOBILE MENU
-// ==============================
-const hamburger = document.getElementById("hamburger");
-const navLinks = document.querySelector(".nav-links");
+// =========================
+// MOBILE MENU TOGGLE
+// =========================
 
-if (hamburger) {
-  hamburger.addEventListener("click", () => {
-    navLinks.classList.toggle("open");
-  });
-}
+const menuToggle = document.createElement("button");
+menuToggle.classList.add("menu-toggle");
+menuToggle.innerHTML = "☰";
 
-// ==============================
-// SCROLL ANIMATIONS
-// ==============================
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-    }
-  });
-}, { threshold: 0.1 });
+const nav = document.querySelector(".nav");
+const header = document.querySelector(".header");
 
-document.querySelectorAll(".card, section, img").forEach(el => {
-  el.classList.add("fade-in");
-  observer.observe(el);
+header.appendChild(menuToggle);
+
+menuToggle.addEventListener("click", () => {
+  nav.classList.toggle("active");
+  menuToggle.classList.toggle("open");
 });
 
-// ==============================
-// FORM HANDLING (WEB3FORMS)
-// ==============================
-const form = document.getElementById("quoteForm");
+// =========================
+// STICKY HEADER EFFECT
+// =========================
 
-if (form) {
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const name = form.querySelector("input[type='text']").value;
-    const phone = form.querySelector("input[type='tel']").value;
-
-    if (!name || !phone) {
-      alert("Please fill all fields");
-      return;
-    }
-
-    // ==========================
-    // 1. SEND TO WEB3FORMS
-    // ==========================
-    const data = {
-      access_key: "YOUR_ACCESS_KEY_HERE",
-      name: name,
-      phone: phone,
-      subject: "New Billo Signs Lead"
-    };
-
-    try {
-      await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      });
-
-    } catch (err) {
-      console.error("Form error:", err);
-    }
-
-    // ==========================
-    // 2. WHATSAPP AUTO MESSAGE
-    // ==========================
-    const message = `Hi Billo Signs,%0A%0AI need a quote.%0AName: ${name}%0APhone: ${phone}`;
-
-    const waLink = `https://wa.me/15485773748?text=${message}`;
-
-    // ==========================
-    // 3. SUCCESS UI
-    // ==========================
-    form.innerHTML = `
-      <h3>✅ Request Sent</h3>
-      <p>We’ll contact you within 24 hours.</p>
-      <a href="${waLink}" class="btn whatsapp full" target="_blank">
-        Continue on WhatsApp →
-      </a>
-    `;
-  });
-}
-
-// ==============================
-// WHATSAPP BUTTON AUTO MESSAGE
-// ==============================
-document.querySelectorAll(".btn.whatsapp").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const message = "Hi Billo Signs, I need a quote.";
-    btn.href = `https://wa.me/15485773748?text=${encodeURIComponent(message)}`;
-  });
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
+  } else {
+    header.style.boxShadow = "none";
+  }
 });
 
-// ==============================
-// SMOOTH SCROLL (better UX)
-// ==============================
-document.querySelectorAll("a[href^='#']").forEach(anchor => {
-  anchor.addEventListener("click", function (e) {
+// =========================
+// SMOOTH SCROLL
+// =========================
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
     e.preventDefault();
 
     const target = document.querySelector(this.getAttribute("href"));
+
     if (target) {
       target.scrollIntoView({
-        behavior: "smooth"
+        behavior: "smooth",
+        block: "start"
       });
     }
+
+    // Close mobile nav
+    nav.classList.remove("active");
   });
+});
+
+// =========================
+// FAQ ACCORDION
+// =========================
+
+const faqs = document.querySelectorAll("#faq h3");
+
+faqs.forEach(faq => {
+  faq.addEventListener("click", () => {
+    const content = faq.nextElementSibling;
+
+    if (!content) return;
+
+    content.classList.toggle("open");
+
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+});
+
+// =========================
+// SCROLL ANIMATIONS
+// =========================
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("animate");
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll("section").forEach(section => {
+  observer.observe(section);
+});
+
+// =========================
+// FORM VALIDATION + WHATSAPP
+// =========================
+
+const form = document.querySelector("form");
+
+form.addEventListener("submit", function(e) {
+
+  const name = form.querySelector("input[name='name']").value.trim();
+  const phone = form.querySelector("input[name='phone']").value.trim();
+
+  if (name.length < 2) {
+    alert("Please enter a valid name.");
+    e.preventDefault();
+    return;
+  }
+
+  if (phone.length < 8) {
+    alert("Please enter a valid phone number.");
+    e.preventDefault();
+    return;
+  }
+
+});
+
+// =========================
+// WHATSAPP DYNAMIC MESSAGE
+// =========================
+
+const whatsappBtn = document.querySelector(".btn-whatsapp");
+
+if (whatsappBtn) {
+  whatsappBtn.addEventListener("click", () => {
+
+    const message = encodeURIComponent(
+      "Hi Billo Signs, I need a quote for custom signage in Edmonton."
+    );
+
+    whatsappBtn.href = `https://wa.me/13439895043?text=${message}`;
+  });
+}
+
+// =========================
+// STICKY MOBILE CTA INJECTION
+// =========================
+
+const stickyBar = document.createElement("div");
+stickyBar.classList.add("sticky-cta");
+
+stickyBar.innerHTML = `
+  <a href="tel:+13439895043" class="call">Call</a>
+  <a href="https://wa.me/13439895043" class="whatsapp">WhatsApp</a>
+  <a href="#quote" class="quote">Quote</a>
+`;
+
+document.body.appendChild(stickyBar);
+
+// =========================
+// PAGE LOAD ANIMATION
+// =========================
+
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
 });
