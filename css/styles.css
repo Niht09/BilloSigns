@@ -1294,7 +1294,7 @@ textarea {
 
 .print-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2px;
   background: var(--clr-border-dark);
   border-radius: var(--r-md);
@@ -2585,9 +2585,19 @@ textarea {
   animation: modalFadeIn var(--t-base) var(--ease) both;
 }
 
+/* Closing state — fade out before hidden is applied */
+.cs-modal-overlay.is-closing {
+  animation: modalFadeOut var(--t-base) var(--ease) both;
+}
+
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+@keyframes modalFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
 
 .cs-modal {
@@ -2610,20 +2620,20 @@ textarea {
 }
 
 .cs-modal-close {
-  position: sticky;
-  top: var(--sp-3);
-  float: right;
-  margin: var(--sp-3) var(--sp-3) 0 0;
+  position: absolute;
+  top: var(--sp-2);
+  right: var(--sp-2);
   width: 40px;
   height: 40px;
-  background: var(--clr-bg4);
-  border: 1px solid var(--clr-border);
+  background: rgba(11,13,18,.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--clr-border2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--clr-muted);
+  color: var(--clr-white);
   z-index: 10;
   transition: background var(--t-base), color var(--t-base), border-color var(--t-base);
 }
