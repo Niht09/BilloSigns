@@ -763,6 +763,111 @@ function initCTATracking() {
    12. INIT — Run everything on DOMContentLoaded
 ───────────────────────────────────────────────────────────── */
 
+/* ─────────────────────────────────────────────────────────────
+   ===== NEW: CASE STUDIES MODAL =====
+───────────────────────────────────────────────────────────── */
+
+function initCaseStudyModal() {
+  const overlay  = qs('#csModalOverlay');
+  const modal    = qs('#csModal');
+  const closeBtn = qs('#csModalClose');
+  const cards    = qsa('.cs-card');
+
+  // Guard — section may not be on current page
+  if (!overlay || !cards.length) return;
+
+  const UI = {
+    img:      qs('#csModalImg'),
+    title:    qs('#csModalTitle'),
+    desc:     qs('#csModalDesc'),
+    services: qs('#csModalServices'),
+    result:   qs('#csModalResult'),
+    cta:      qs('#csModalCTA'),
+  };
+
+  // ── Open modal ──────────────────────────────────────────
+  function openModal(card) {
+    const title    = card.dataset.csTitle    || '';
+    const imgSrc   = card.dataset.csImg      || '';
+    const desc     = card.dataset.csDesc     || '';
+    const services = card.dataset.csServices || '';
+    const result   = card.dataset.csResult   || '';
+
+    // Populate content
+    UI.title.textContent = title;
+    UI.desc.textContent  = desc;
+    UI.result.textContent = result;
+
+    // Image
+    if (UI.img) {
+      UI.img.src = imgSrc;
+      UI.img.alt = title;
+    }
+
+    // Service tags
+    if (UI.services) {
+      UI.services.innerHTML = services
+        .split(',')
+        .map(s => `<span class="cs-modal-tag">${escapeHTML(s.trim())}</span>`)
+        .join('');
+    }
+
+    // Show overlay
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+
+    // Focus the close button for accessibility
+    requestAnimationFrame(() => closeBtn?.focus());
+  }
+
+  // ── Close modal ─────────────────────────────────────────
+  function closeModal() {
+    overlay.hidden = true;
+    document.body.style.overflow = '';
+    // Return focus to the card that opened the modal
+    if (lastFocusedCard) lastFocusedCard.focus();
+    lastFocusedCard = null;
+  }
+
+  let lastFocusedCard = null;
+
+  // ── Card click / keyboard ────────────────────────────────
+  cards.forEach(card => {
+    on(card, 'click', () => {
+      lastFocusedCard = card;
+      openModal(card);
+    });
+
+    // Keyboard: Enter or Space opens modal
+    on(card, 'keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        lastFocusedCard = card;
+        openModal(card);
+      }
+    });
+  });
+
+  // ── Close button ─────────────────────────────────────────
+  on(closeBtn, 'click', closeModal);
+
+  // ── Click outside modal ──────────────────────────────────
+  on(overlay, 'click', e => {
+    if (e.target === overlay) closeModal();
+  });
+
+  // ── ESC key ──────────────────────────────────────────────
+  on(document, 'keydown', e => {
+    if (e.key === 'Escape' && !overlay.hidden) closeModal();
+  });
+
+  // ── CTA inside modal closes and scrolls to quote ─────────
+  on(UI.cta, 'click', () => {
+    closeModal();
+  });
+}
+// ===== END: CASE STUDIES =====
+
 function init() {
   // Core UI
   initNavScroll();
@@ -777,6 +882,9 @@ function init() {
   initFunnel();
   initForm();
   initFAQ();
+
+  // ===== NEW: CASE STUDIES =====
+  initCaseStudyModal();
 
   // Helpers
   initSmoothScroll();
