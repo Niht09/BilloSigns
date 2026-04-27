@@ -2590,6 +2590,17 @@ textarea {
   animation: modalFadeOut var(--t-base) var(--ease) both;
 }
 
+/* Nuclear safety — [hidden] wins over everything including extensions */
+.cs-modal-overlay[hidden] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* Ensure open overlay blocks all clicks beneath it */
+.cs-modal-overlay {
+  pointer-events: auto;
+}
+
 @keyframes modalFadeIn {
   from { opacity: 0; }
   to   { opacity: 1; }
