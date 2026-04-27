@@ -2107,6 +2107,139 @@ textarea {
 }
 
 /* ───────────────────────────────────────────────────────────────
+   22b. EXPANDED SERVICES & USE CASES
+─────────────────────────────────────────────────────────────── */
+
+/* Sub-heading inside services section */
+.services-sub-heading {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: -.3px;
+  color: var(--clr-white);
+  margin-bottom: var(--sp-4);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.services-sub-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--clr-border);
+}
+
+/* 6-column smaller cards */
+.services-grid--6 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.service-card--sm {
+  padding: var(--sp-4) var(--sp-3);
+}
+
+.service-card--sm h3 {
+  font-size: 14px;
+}
+
+.service-card--sm p {
+  font-size: 12.5px;
+}
+
+/* ── USE CASES SECTION ────────────────────────────────────── */
+.use-cases-section { background: var(--clr-bg2); }
+
+.use-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+}
+
+.use-case-card {
+  background: var(--clr-bg3);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--r-md);
+  padding: var(--sp-6) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--t-base), transform var(--t-base);
+}
+
+/* Gold accent line on top */
+.use-case-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--clr-gold), transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-slow) var(--ease);
+}
+
+.use-case-card:hover {
+  border-color: var(--clr-gold-border);
+  transform: translateY(-3px);
+}
+
+.use-case-card:hover::before { transform: scaleX(1); }
+
+.uc-icon {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.uc-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--clr-gold-dim);
+  border: 1px solid var(--clr-gold-border);
+  color: var(--clr-gold);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  align-self: flex-start;
+}
+
+.use-case-card h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: -.4px;
+  color: var(--clr-white);
+}
+
+.use-case-card p {
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.uc-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--clr-gold);
+  text-decoration: none;
+  margin-top: var(--sp-1);
+  transition: gap var(--t-base);
+}
+
+.use-case-card:hover .uc-cta { gap: 9px; }
+
+/* ───────────────────────────────────────────────────────────────
    23. FOOTER
 ─────────────────────────────────────────────────────────────── */
 .site-footer {
@@ -2345,6 +2478,8 @@ textarea {
   .problem-grid { grid-template-columns: 1fr; gap: var(--sp-5); }
   .solution-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid--6 { grid-template-columns: repeat(2, 1fr); }
+  .use-cases-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
   .process-grid { grid-template-columns: 1fr; }
   .process-step {
     border-right: none;
@@ -2397,6 +2532,8 @@ textarea {
 
   /* Services */
   .services-grid { grid-template-columns: 1fr; }
+  .services-grid--6 { grid-template-columns: 1fr; }
+  .use-cases-grid { grid-template-columns: 1fr; }
 
   /* Print */
   .print-grid { grid-template-columns: repeat(2, 1fr); }
