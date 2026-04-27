@@ -456,6 +456,8 @@ textarea {
   padding-block: var(--sp-1);
   position: relative;
   transition: color var(--t-base);
+  text-align: center;
+  line-height: 19px;
 }
 
 .nav-link::after {
