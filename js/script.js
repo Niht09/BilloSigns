@@ -27,7 +27,7 @@
 ───────────────────────────────────────────────────────────── */
 
 const CONFIG = {
-  WA_NUMBER:    '17801234567',
+  WA_NUMBER:    '15485773748',
   EMAIL:        'hello@billosigns.ca',
   NAV_OFFSET:   80,   // px — scroll threshold before header "sticks"
   COUNT_DURATION: 1600, // ms
