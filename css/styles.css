@@ -457,7 +457,7 @@ textarea {
   position: relative;
   transition: color var(--t-base);
   text-align: center;
-  line-height: 19px;
+  line-height: 16px;
 }
 
 .nav-link::after {
