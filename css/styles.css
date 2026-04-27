@@ -1304,6 +1304,7 @@ textarea {
   overflow: hidden;
 }
 
+.print-grid--2 { grid-template-columns: repeat(2, 1fr); }
 .print-grid--3 { grid-template-columns: repeat(3, 1fr); }
 
 .print-card {
@@ -3089,6 +3090,7 @@ textarea {
   .section-heading { font-size: 26px; }
 
   .print-grid { grid-template-columns: 1fr; }
+  .print-grid--2 { grid-template-columns: 1fr; }
   .cities-grid { grid-template-columns: 1fr 1fr; }
 
   .hero-ctas .btn { padding: 14px 20px; font-size: 14px; }
