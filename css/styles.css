@@ -445,11 +445,11 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: var(--sp-5);
+  gap: var(--sp-4);
 }
 
 .nav-link {
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--clr-muted);
   letter-spacing: .01em;
@@ -457,7 +457,8 @@ textarea {
   position: relative;
   transition: color var(--t-base);
   text-align: center;
-  line-height: 16px;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .nav-link::after {
