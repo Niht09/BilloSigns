@@ -793,15 +793,21 @@ function initCaseStudyModal() {
     const services = card.dataset.csServices || '';
     const result   = card.dataset.csResult   || '';
 
-    // Populate content
-    UI.title.textContent = title;
-    UI.desc.textContent  = desc;
-    UI.result.textContent = result;
+    // Show overlay first so the image container is in the viewport
+    overlay.classList.remove('is-closing');
+    overlay.hidden = false;
+    document.body.style.overflow = 'hidden';
 
-    // Image
+    // Populate text content
+    if (UI.title)  UI.title.textContent  = title;
+    if (UI.desc)   UI.desc.textContent   = desc;
+    if (UI.result) UI.result.textContent = result;
+
+    // Clear src then set on next frame so browser registers a fresh load request
     if (UI.img) {
-      UI.img.src = imgSrc;
+      UI.img.src = '';
       UI.img.alt = title;
+      requestAnimationFrame(() => { UI.img.src = imgSrc; });
     }
 
     // Service tags
@@ -812,21 +818,24 @@ function initCaseStudyModal() {
         .join('');
     }
 
-    // Show overlay
-    overlay.hidden = false;
-    document.body.style.overflow = 'hidden';
-
     // Focus the close button for accessibility
     requestAnimationFrame(() => closeBtn?.focus());
   }
 
   // ── Close modal ─────────────────────────────────────────
   function closeModal() {
-    overlay.hidden = true;
+    // 1. Trigger fade-out animation
+    overlay.classList.add('is-closing');
     document.body.style.overflow = '';
-    // Return focus to the card that opened the modal
-    if (lastFocusedCard) lastFocusedCard.focus();
-    lastFocusedCard = null;
+
+    // 2. After animation completes, actually hide the element
+    setTimeout(() => {
+      overlay.hidden = true;
+      overlay.classList.remove('is-closing');
+      // 3. Return focus to the card that opened the modal
+      if (lastFocusedCard) lastFocusedCard.focus();
+      lastFocusedCard = null;
+    }, 260); // matches --t-base (.25s) + small buffer
   }
 
   let lastFocusedCard = null;
