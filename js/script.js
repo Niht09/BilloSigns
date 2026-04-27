@@ -776,6 +776,13 @@ function initCaseStudyModal() {
   // Guard — section may not be on current page
   if (!overlay || !cards.length) return;
 
+  // ── SAFETY RESET — force closed on load ─────────────────
+  // Bulletproofs against browser extensions (e.g. dark mode injectors)
+  // that strip the `hidden` attribute before JS runs
+  overlay.hidden = true;
+  overlay.classList.remove('is-closing');
+  document.body.style.overflow = '';
+
   const UI = {
     img:      qs('#csModalImg'),
     title:    qs('#csModalTitle'),
@@ -796,6 +803,7 @@ function initCaseStudyModal() {
     // Show overlay first so the image container is in the viewport
     overlay.classList.remove('is-closing');
     overlay.hidden = false;
+    overlay.style.pointerEvents = 'auto';
     document.body.style.overflow = 'hidden';
 
     // Populate text content
