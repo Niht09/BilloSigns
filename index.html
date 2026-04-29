@@ -29,13 +29,49 @@
   <meta name="twitter:title" content="Sign Shop Edmonton — Billo Signs & Graphics">
   <meta name="twitter:description" content="Custom signage and print for Edmonton businesses. One team. No runaround.">
 
+  <!-- ===== UPDATED: GA4 — moved before fonts/CSS for earlier initialisation ===== -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-V7JNFZB5PM"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-V7JNFZB5PM', {
+      page_title: document.title,
+      page_location: window.location.href,
+    });
+  </script>
+
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
 
+  <!-- ===== NEW: DNS PREFETCH ===== -->
+  <link rel="dns-prefetch" href="//www.google-analytics.com">
+  <link rel="dns-prefetch" href="//connect.facebook.net">
+  <link rel="dns-prefetch" href="//images.unsplash.com">
+  <link rel="dns-prefetch" href="//wa.me">
+  <!-- ===== END: DNS PREFETCH ===== -->
+
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css?v=5.11">
+  <link rel="stylesheet" href="css/styles.css?v=5.13">
+
+  <!-- Facebook Pixel -->
+  <!-- Replace XXXXXXXXXXXXXXXXXX with your real Pixel ID from business.facebook.com -->
+  <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+    (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', 'XXXXXXXXXXXXXXXXXX');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=XXXXXXXXXXXXXXXXXX&ev=PageView&noscript=1" alt="">
+  </noscript>
 
   <!-- ═══════════════════════════════════════
        SCHEMA MARKUP
@@ -139,7 +175,6 @@
           <li><a href="#print" class="nav-link">Print & Design</a></li>
           <li><a href="#process" class="nav-link">How It Works</a></li>
           <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-          <li><a href="#case-studies" class="nav-link">Case Studies</a></li>
           <li><a href="blog.html" class="nav-link">Blog</a></li>
           <li><a href="#faq" class="nav-link">FAQ</a></li>
         </ul>
@@ -172,7 +207,6 @@
         <li><a href="#print" class="mob-nav-link">Print &amp; Design <span class="mob-arrow" aria-hidden="true">→</span></a></li>
         <li><a href="#process" class="mob-nav-link">How It Works <span class="mob-arrow" aria-hidden="true">→</span></a></li>
         <li><a href="#portfolio" class="mob-nav-link">Portfolio <span class="mob-arrow" aria-hidden="true">→</span></a></li>
-        <li><a href="#case-studies" class="mob-nav-link">Case Studies <span class="mob-arrow" aria-hidden="true">→</span></a></li>
         <li><a href="blog.html" class="mob-nav-link">Blog <span class="mob-arrow" aria-hidden="true">→</span></a></li>
         <li><a href="#faq" class="mob-nav-link">FAQ <span class="mob-arrow" aria-hidden="true">→</span></a></li>
       </ul>
@@ -907,218 +941,6 @@
       </div>
     </section>
 
-    <!-- ===== NEW: CASE STUDIES ===== -->
-    <section class="section section-dark" id="case-studies" aria-labelledby="cs-heading">
-      <div class="container">
-        <span class="section-tag reveal">Real Results</span>
-        <h2 class="section-heading reveal reveal-d1" id="cs-heading">
-          Case Studies — Projects That Delivered
-        </h2>
-        <p class="section-desc reveal reveal-d2">
-          Every project tells a story. Here's how we helped Edmonton and Alberta businesses show up, stand out, and open on time.
-        </p>
-        <div class="cs-grid">
-
-          <!-- Case Study 1 -->
-          <article class="cs-card reveal" role="button" tabindex="0"
-            aria-label="Open case study: Spice Garden Restaurant"
-            data-cs="1"
-            data-cs-title="Spice Garden Restaurant — Full Storefront Signage"
-            data-cs-img="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80"
-            data-cs-desc="Spice Garden was opening their second Edmonton location with a hard launch date three weeks out — and no signage sorted. We delivered a complete package: custom channel letter sign, frosted window vinyl, interior wall branding, and a full set of opening banners — all installed two days before their doors opened."
-            data-cs-services="Channel Letters, Window Graphics, Interior Branding, Banners"
-            data-cs-result="Opened on time. Fully branded from day one. Repeat client.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=75"
-                   alt="Custom Channel Letter Sign for Restaurant in Edmonton, AB"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Restaurant</span>
-                <span class="cs-tag">Edmonton</span>
-              </div>
-              <h3>Spice Garden Restaurant</h3>
-              <p>Full storefront package — channel letters, window graphics, and interior branding delivered before opening day.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-          <!-- Case Study 2 -->
-          <article class="cs-card reveal reveal-d1" role="button" tabindex="0"
-            aria-label="Open case study: Metro Plaza"
-            data-cs="2"
-            data-cs-title="Metro Plaza — Multi-Tenant Signage System"
-            data-cs-img="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=1200&q=80"
-            data-cs-desc="A plaza owner managing six retail units needed consistent, professional signage across all tenants — different businesses, one unified system. We designed a signage standard for the plaza, then produced and installed individual signs for each unit keeping brand consistency while respecting each business's identity."
-            data-cs-services="Lightbox Signs, Storefront Signs, Wayfinding, Design System"
-            data-cs-result="Six units fully signed in under two weeks. Zero tenant complaints. Plaza owner now on retainer.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?w=800&q=75"
-                   alt="LED Lightbox Sign for Plaza Tenant in Edmonton"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Plaza</span>
-                <span class="cs-tag">Multi-Unit</span>
-              </div>
-              <h3>Metro Plaza — 6 Unit Rollout</h3>
-              <p>Designed and installed a unified signage system across six retail units in under two weeks.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-          <!-- Case Study 3 -->
-          <article class="cs-card reveal reveal-d2" role="button" tabindex="0"
-            aria-label="Open case study: Luxe Salon"
-            data-cs="3"
-            data-cs-title="Luxe Salon — Brand Refresh &amp; Signage Overhaul"
-            data-cs-img="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1200&q=80"
-            data-cs-desc="Luxe Salon had been operating for four years with signage that no longer reflected their premium positioning. The rebrand started with a new logo, flowed into updated window graphics, a backlit storefront sign, and new business cards and print collateral — all designed to feel cohesive and high-end."
-            data-cs-services="Logo Design, Lightbox Sign, Window Graphics, Business Cards, Print Collateral"
-            data-cs-result="Immediate uplift in walk-in traffic. Staff reported customers commenting on the new look within the first week.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=75"
-                   alt="Frosted Window Vinyl for Salon in St. Albert Alberta"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Salon</span>
-                <span class="cs-tag">Rebrand</span>
-              </div>
-              <h3>Luxe Salon — Full Rebrand</h3>
-              <p>New logo, updated storefront, window graphics, and print collateral — a complete brand refresh that lifted walk-in traffic.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-          <!-- Case Study 4 -->
-          <article class="cs-card reveal reveal-d3" role="button" tabindex="0"
-            aria-label="Open case study: Northern Trades"
-            data-cs="4"
-            data-cs-title="Northern Trades — Fleet Vehicle Decals"
-            data-cs-img="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80"
-            data-cs-desc="A trades company operating across Edmonton and Red Deer needed their fleet of eight vehicles branded consistently. We designed a clean, bold vehicle decal system and applied it across all eight trucks — turning their vehicles into moving billboards that generate calls on every job site."
-            data-cs-services="Vehicle Decals/Stickers, Graphic Design, Fleet Branding"
-            data-cs-result="Fleet of 8 vehicles branded in 3 days. Owner reported new inbound calls directly attributed to vehicle visibility within the first month.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=75"
-                   alt="Vehicle Decals and Graphics by Sign Shop Edmonton — Billo Signs"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Trades</span>
-                <span class="cs-tag">Fleet</span>
-              </div>
-              <h3>Northern Trades — Fleet of 8</h3>
-              <p>Designed and applied a bold vehicle decal system across eight trucks in three days. New calls within the first month.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-          <!-- Case Study 5 -->
-          <article class="cs-card reveal reveal-d4" role="button" tabindex="0"
-            aria-label="Open case study: Craft Brewing Co."
-            data-cs="5"
-            data-cs-title="Craft Brewing Co. — Interior Branding &amp; Large Format"
-            data-cs-img="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80"
-            data-cs-desc="A new craft brewery opening in south Edmonton wanted their taproom to feel like a brand experience, not just a bar. We handled every visual touchpoint — a large format feature wall mural, menu boards, custom window graphics, and branded collateral for their launch event."
-            data-cs-services="Interior Mural, Large Format Print, Menu Boards, Window Graphics, Event Print"
-            data-cs-result="Taproom opened to full house on launch night. Featured in a local food blog within two weeks.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=75"
-                   alt="Interior Branding and Large Format Print for Business in Edmonton"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Hospitality</span>
-                <span class="cs-tag">Interior</span>
-              </div>
-              <h3>Craft Brewing Co. — Taproom Launch</h3>
-              <p>Feature wall mural, menu boards, window graphics, and launch print — full interior brand experience.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-          <!-- Case Study 6 -->
-          <article class="cs-card reveal reveal-d5" role="button" tabindex="0"
-            aria-label="Open case study: Peak Realty"
-            data-cs="6"
-            data-cs-title="Peak Realty — Office Signage &amp; Marketing Print"
-            data-cs-img="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80"
-            data-cs-desc="Peak Realty was expanding to a new office and needed everything from office signage to printed marketing materials — all aligned to their brand. We handled the full scope: dimensional office letters, frosted glass graphics, lawn signs, business cards, and presentation folders."
-            data-cs-services="Dimensional Letters, Frosted Glass, Lawn Signs, Business Cards, Folders"
-            data-cs-result="Office fully branded on move-in day. All print materials delivered before their first client meeting.">
-            <div class="cs-img-wrap">
-              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=75"
-                   alt="Office Signage and Business Cards Edmonton Alberta"
-                   loading="lazy">
-              <div class="cs-overlay">
-                <span class="cs-view-btn">View Project →</span>
-              </div>
-            </div>
-            <div class="cs-body">
-              <div class="cs-tags">
-                <span class="cs-tag">Real Estate</span>
-                <span class="cs-tag">Office</span>
-              </div>
-              <h3>Peak Realty — Office &amp; Print</h3>
-              <p>Dimensional office letters, frosted glass, lawn signs, and full print package — fully branded on move-in day.</p>
-              <span class="cs-cta">View Project →</span>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== NEW: CASE STUDY MODAL ===== -->
-    <div class="cs-modal-overlay" id="csModalOverlay" role="dialog" aria-modal="true" aria-labelledby="csModalTitle" hidden>
-      <div class="cs-modal" id="csModal">
-        <button class="cs-modal-close" id="csModalClose" aria-label="Close case study">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
-        </button>
-        <div class="cs-modal-img-wrap">
-          <img src="" alt="" id="csModalImg" loading="eager" decoding="async">
-        </div>
-        <div class="cs-modal-body">
-          <h2 class="cs-modal-title" id="csModalTitle"></h2>
-          <p class="cs-modal-desc" id="csModalDesc"></p>
-          <div class="cs-modal-meta">
-            <div class="cs-modal-services">
-              <span class="cs-modal-label">Services Used</span>
-              <div class="cs-modal-tags" id="csModalServices"></div>
-            </div>
-            <div class="cs-modal-result-wrap">
-              <span class="cs-modal-label">Result</span>
-              <p class="cs-modal-result" id="csModalResult"></p>
-            </div>
-          </div>
-          <a href="#quote" class="btn btn-gold" id="csModalCTA">Get a Similar Quote →</a>
-        </div>
-      </div>
-    </div>
-    <!-- ===== END: CASE STUDIES ===== -->
-
     <!-- ═══════════════════════════════════════
          TESTIMONIALS
     ═══════════════════════════════════════ -->
@@ -1709,7 +1531,7 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/script.js?v=5.11" defer></script>
+  <script src="js/script.js?v=5.13" defer></script>
 
 </body>
 </html>
