@@ -471,6 +471,21 @@ function showSuccess(form, successEl, btn) {
     successEl.hidden = false;
     successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+
+  // ===== NEW: GA4 form conversion event =====
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'generate_lead', {
+      event_category: 'conversion',
+      event_label: 'quote_form_submitted',
+      value: 1,
+    });
+  }
+
+  // ===== NEW: Pixel Lead event =====
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead');
+  }
+
   // Clear sensitive fields
   form.reset();
   // Reset funnel hidden fields too
@@ -704,8 +719,7 @@ function initFieldBehavior() {
 }
 
 /* ─────────────────────────────────────────────────────────────
-   BONUS: SECTION ANALYTICS HOOKS
-   Fires console events (replace with GA4 / GTM if needed)
+   GA4 EVENTS + PIXEL EVENTS
 ───────────────────────────────────────────────────────────── */
 
 function initSectionTracking() {
@@ -718,8 +732,15 @@ function initSectionTracking() {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
-        // Replace with: window.gtag?.('event', 'section_view', { section: sel });
-        console.info(`[BilloSigns] Section viewed: ${sel}`);
+
+        // ===== NEW: GA4 section view event =====
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'section_view', {
+            event_category: 'engagement',
+            event_label: sel,
+          });
+        }
+
         observer.unobserve(e.target);
       });
     }, { threshold: 0.3 });
@@ -728,162 +749,59 @@ function initSectionTracking() {
   });
 }
 
-/* ─────────────────────────────────────────────────────────────
-   BONUS: CTA CLICK TRACKING HOOKS
-   Ready for Google Analytics / GTM event integration
-───────────────────────────────────────────────────────────── */
-
 function initCTATracking() {
   // Track all gold CTA button clicks
   qsa('.btn-gold[href="#quote"]').forEach(btn => {
     on(btn, 'click', () => {
-      // Replace with: window.gtag?.('event', 'cta_click', { cta: 'get_quote' });
-      console.info('[BilloSigns] CTA clicked: Get Quote');
+      // ===== NEW: GA4 CTA click event =====
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'cta_click', {
+          event_category: 'conversion',
+          event_label: 'get_quote_button',
+        });
+      }
     });
   });
 
   // Track WhatsApp clicks
   qsa('a[href*="wa.me"]').forEach(link => {
     on(link, 'click', () => {
-      // Replace with: window.gtag?.('event', 'whatsapp_click');
-      console.info('[BilloSigns] WhatsApp link clicked');
+      // ===== NEW: GA4 WhatsApp click event =====
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'whatsapp_click', {
+          event_category: 'conversion',
+          event_label: 'whatsapp_contact',
+        });
+      }
+      // ===== NEW: Pixel WhatsApp contact event =====
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Contact');
+      }
     });
   });
 
   // Track phone call clicks
   qsa('a[href^="tel:"]').forEach(link => {
     on(link, 'click', () => {
-      // Replace with: window.gtag?.('event', 'phone_call');
-      console.info('[BilloSigns] Phone call initiated');
+      // ===== NEW: GA4 phone call event =====
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'phone_call', {
+          event_category: 'conversion',
+          event_label: 'phone_contact',
+        });
+      }
+      // ===== NEW: Pixel phone contact event =====
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Contact');
+      }
     });
   });
 }
+// ===== END: GA4 EVENTS + PIXEL EVENTS =====
 
 /* ─────────────────────────────────────────────────────────────
    12. INIT — Run everything on DOMContentLoaded
 ───────────────────────────────────────────────────────────── */
-
-/* ─────────────────────────────────────────────────────────────
-   ===== NEW: CASE STUDIES MODAL =====
-───────────────────────────────────────────────────────────── */
-
-function initCaseStudyModal() {
-  const overlay  = qs('#csModalOverlay');
-  const modal    = qs('#csModal');
-  const closeBtn = qs('#csModalClose');
-  const cards    = qsa('.cs-card');
-
-  // Guard — section may not be on current page
-  if (!overlay || !cards.length) return;
-
-  // ── SAFETY RESET — force closed on load ─────────────────
-  // Bulletproofs against browser extensions (e.g. dark mode injectors)
-  // that strip the `hidden` attribute before JS runs
-  overlay.hidden = true;
-  overlay.classList.remove('is-closing');
-  document.body.style.overflow = '';
-
-  const UI = {
-    img:      qs('#csModalImg'),
-    title:    qs('#csModalTitle'),
-    desc:     qs('#csModalDesc'),
-    services: qs('#csModalServices'),
-    result:   qs('#csModalResult'),
-    cta:      qs('#csModalCTA'),
-  };
-
-  // ── Open modal ──────────────────────────────────────────
-  function openModal(card) {
-    const title    = card.dataset.csTitle    || '';
-    const imgSrc   = card.dataset.csImg      || '';
-    const desc     = card.dataset.csDesc     || '';
-    const services = card.dataset.csServices || '';
-    const result   = card.dataset.csResult   || '';
-
-    // Show overlay first so the image container is in the viewport
-    overlay.classList.remove('is-closing');
-    overlay.hidden = false;
-    overlay.style.pointerEvents = 'auto';
-    document.body.style.overflow = 'hidden';
-
-    // Populate text content
-    if (UI.title)  UI.title.textContent  = title;
-    if (UI.desc)   UI.desc.textContent   = desc;
-    if (UI.result) UI.result.textContent = result;
-
-    // Clear src then set on next frame so browser registers a fresh load request
-    if (UI.img) {
-      UI.img.src = '';
-      UI.img.alt = title;
-      requestAnimationFrame(() => { UI.img.src = imgSrc; });
-    }
-
-    // Service tags
-    if (UI.services) {
-      UI.services.innerHTML = services
-        .split(',')
-        .map(s => `<span class="cs-modal-tag">${escapeHTML(s.trim())}</span>`)
-        .join('');
-    }
-
-    // Focus the close button for accessibility
-    requestAnimationFrame(() => closeBtn?.focus());
-  }
-
-  // ── Close modal ─────────────────────────────────────────
-  function closeModal() {
-    // 1. Trigger fade-out animation
-    overlay.classList.add('is-closing');
-    document.body.style.overflow = '';
-
-    // 2. After animation completes, actually hide the element
-    setTimeout(() => {
-      overlay.hidden = true;
-      overlay.classList.remove('is-closing');
-      // 3. Return focus to the card that opened the modal
-      if (lastFocusedCard) lastFocusedCard.focus();
-      lastFocusedCard = null;
-    }, 260); // matches --t-base (.25s) + small buffer
-  }
-
-  let lastFocusedCard = null;
-
-  // ── Card click / keyboard ────────────────────────────────
-  cards.forEach(card => {
-    on(card, 'click', () => {
-      lastFocusedCard = card;
-      openModal(card);
-    });
-
-    // Keyboard: Enter or Space opens modal
-    on(card, 'keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        lastFocusedCard = card;
-        openModal(card);
-      }
-    });
-  });
-
-  // ── Close button ─────────────────────────────────────────
-  on(closeBtn, 'click', closeModal);
-
-  // ── Click outside modal ──────────────────────────────────
-  on(overlay, 'click', e => {
-    if (e.target === overlay) closeModal();
-  });
-
-  // ── ESC key ──────────────────────────────────────────────
-  on(document, 'keydown', e => {
-    if (e.key === 'Escape' && !overlay.hidden) closeModal();
-  });
-
-  // ── CTA inside modal closes and scrolls to quote ─────────
-  on(UI.cta, 'click', () => {
-    closeModal();
-  });
-}
-// ===== END: CASE STUDIES =====
 
 function init() {
   // Core UI
@@ -899,9 +817,6 @@ function init() {
   initFunnel();
   initForm();
   initFAQ();
-
-  // ===== NEW: CASE STUDIES =====
-  initCaseStudyModal();
 
   // Helpers
   initSmoothScroll();
