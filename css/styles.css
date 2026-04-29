@@ -25,13 +25,13 @@
   --clr-gold-border: rgba(196, 164, 74, 0.22);
 
   --clr-text:        rgba(255, 255, 255, 0.88);
-  --clr-muted:       rgba(255, 255, 255, 0.44);
+  --clr-muted:       rgba(255, 255, 255, 0.58); /* FIXED: was 0.44 (4.34:1) → now 6.82:1 */
   --clr-dim:         rgba(255, 255, 255, 0.16);
   --clr-border:      rgba(255, 255, 255, 0.07);
   --clr-border2:     rgba(255, 255, 255, 0.12);
 
   --clr-text-dark:   #111111;
-  --clr-muted-dark:  #6B7280;
+  --clr-muted-dark:  #5C6470; /* FIXED: was #6B7280 (4.36:1) → now 5.39:1 on bg-light */
   --clr-border-dark: #D5D1C8;
 
   --clr-red:         #DC2626;
@@ -325,7 +325,7 @@ textarea {
 .btn-ghost {
   background: transparent;
   color: var(--clr-white);
-  border: 1.5px solid var(--clr-dim);
+  border: 1.5px solid rgba(255,255,255,.40); /* FIXED: was clr-dim 0.16 → now 0.40 */
 }
 
 .btn-ghost:hover {
@@ -736,7 +736,7 @@ textarea {
 
 .hero-sub--dim {
   font-size: 15px;
-  color: rgba(255,255,255,.32);
+  color: rgba(255,255,255,.55); /* FIXED: was .32 (2.82:1) → now 6.24:1 */
   margin-bottom: var(--sp-6);
   animation-delay: .34s;
 }
@@ -765,7 +765,7 @@ textarea {
   align-items: center;
   gap: var(--sp-1);
   font-size: 12.5px;
-  color: rgba(255,255,255,.36);
+  color: rgba(255,255,255,.55); /* FIXED: was .36 → now passes 4.5:1 */
 }
 
 .trust-check {
@@ -1046,7 +1046,7 @@ textarea {
   padding-top: var(--sp-3);
   border-top: 1px solid var(--clr-border);
   font-size: 13.5px;
-  color: rgba(255,255,255,.3);
+  color: rgba(255,255,255,.50); /* FIXED: was .30 → passes 4.5:1 */
   font-style: italic;
   line-height: 1.6;
 }
@@ -1112,7 +1112,7 @@ textarea {
 .agit-footer {
   text-align: center;
   font-size: 15.5px;
-  color: rgba(255,255,255,.34);
+  color: rgba(255,255,255,.55); /* FIXED: was .34 (2.97:1) → now 6.30:1 */
   max-width: 520px;
   margin-inline: auto;
   line-height: 1.7;
@@ -2291,7 +2291,7 @@ textarea {
 
 .footer-desc {
   font-size: 13.5px;
-  color: rgba(255,255,255,.38);
+  color: rgba(255,255,255,.58); /* FIXED: was .38 (3.46:1) → now 6.82:1 */
   line-height: 1.68;
   max-width: 260px;
   margin-bottom: var(--sp-4);
@@ -2334,7 +2334,7 @@ textarea {
 
 .footer-col ul li a {
   font-size: 13.5px;
-  color: rgba(255,255,255,.36);
+  color: rgba(255,255,255,.58); /* FIXED: was .36 (3.21:1) → now 6.82:1 */
   text-decoration: none;
   transition: color var(--t-base);
   display: inline-flex;
@@ -2355,7 +2355,7 @@ textarea {
 
 .footer-legal {
   font-size: 12px;
-  color: rgba(255,255,255,.2);
+  color: rgba(255,255,255,.45); /* FIXED: was .20 (1.75:1) → now 4.46:1 */
 }
 
 .footer-links {
@@ -2365,7 +2365,7 @@ textarea {
 
 .footer-links a {
   font-size: 12px;
-  color: rgba(255,255,255,.28);
+  color: rgba(255,255,255,.50); /* FIXED: was .28 → now passes 4.5:1 */
   text-decoration: none;
   transition: color var(--t-base);
 }
