@@ -1,0 +1,8 @@
+# robots.txt — billosigns.ca
+# Generated: April 2026
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://billosigns.ca/sitemap.xml
