@@ -36,10 +36,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
-    gtag('config', 'G-V7JNFZB5PM', {
-      page_title: document.title,
-      page_location: window.location.href,
-    });
+    gtag('config', 'G-V7JNFZB5PM'); /* FIXED: removed redundant page_title/page_location params */
   </script>
 
   <!-- Fonts -->
@@ -55,7 +52,7 @@
   <!-- ===== END: DNS PREFETCH ===== -->
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="css/styles.css?v=5.13">
+  <link rel="stylesheet" href="css/styles.css?v=5.14">
 
   <!-- Facebook Pixel -->
   <!-- Replace XXXXXXXXXXXXXXXXXX with your real Pixel ID from business.facebook.com -->
@@ -1531,7 +1528,7 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="js/script.js?v=5.13" defer></script>
+  <script src="js/script.js?v=5.14" defer></script>
 
 </body>
 </html>
