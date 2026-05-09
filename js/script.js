@@ -803,6 +803,194 @@ function initCTATracking() {
    12. INIT — Run everything on DOMContentLoaded
 ───────────────────────────────────────────────────────────── */
 
+/* ─────────────────────────────────────────────────────────────
+   ===== NEW: BENTO GALLERY + MODAL + FULLSCREEN OVERLAY =====
+   Reads gallery data from data-* attributes on .bento-tile elements.
+   Easy swap later: only data-src/data-thumb/data-alt/data-description
+   need updating when real project photos are available.
+───────────────────────────────────────────────────────────── */
+
+function initBentoGallery() {
+  const tiles    = qsa('.bento-tile');
+  const modal    = qs('#galleryModal');
+  const overlay  = qs('#galleryOverlay');
+  const goGrid   = qs('#goGrid');
+  const viewMore = qs('#viewMoreWork');
+
+  // Guard — section may not exist on current page
+  if (!tiles.length || !modal) return;
+
+  // Modal UI refs
+  const UI = {
+    img:      qs('#gmImg'),
+    title:    qs('#gmTitle'),
+    desc:     qs('#gmDesc'),
+    service:  qs('#gmService'),
+    location: qs('#gmLocation'),
+    counter:  qs('#gmCounter'),
+    closeBtn: qs('#gmClose'),
+    prevBtn:  qs('#gmPrev'),
+    nextBtn:  qs('#gmNext'),
+  };
+
+  // Build gallery data array from tile data-* attributes
+  // This is the SINGLE SOURCE OF TRUTH for gallery content.
+  const gallery = tiles.map(tile => ({
+    src:         tile.dataset.src,
+    thumb:       tile.dataset.thumb,
+    alt:         tile.dataset.alt,
+    title:       tile.dataset.title,
+    service:     tile.dataset.service,
+    location:    tile.dataset.location,
+    caption:     tile.dataset.caption,
+    description: tile.dataset.description,
+  }));
+
+  let currentIndex = 0;
+  let lastFocused  = null;
+
+  // ── SAFETY RESET ─────────────────────────────────────────
+  modal.hidden    = true;
+  if (overlay) overlay.hidden = true;
+  modal.classList.remove('is-closing');
+  if (overlay) overlay.classList.remove('is-closing');
+  document.body.classList.remove('gallery-open');
+
+  // ── Render image at index ────────────────────────────────
+  function renderImage(index) {
+    if (index < 0) index = gallery.length - 1;
+    if (index >= gallery.length) index = 0;
+    currentIndex = index;
+    const item = gallery[index];
+
+    // Clear src first so browser registers new load
+    if (UI.img) {
+      UI.img.src = '';
+      UI.img.alt = item.alt || '';
+      requestAnimationFrame(() => { UI.img.src = item.src; });
+    }
+    if (UI.title)    UI.title.textContent    = item.title || '';
+    if (UI.desc)     UI.desc.textContent     = item.description || '';
+    if (UI.service)  UI.service.textContent  = item.service || '';
+    if (UI.location) UI.location.textContent = item.location || '';
+    if (UI.counter)  UI.counter.textContent  = `${index + 1} / ${gallery.length}`;
+
+    // Preload adjacent images
+    preloadAdjacent(index);
+  }
+
+  function preloadAdjacent(index) {
+    const next = (index + 1) % gallery.length;
+    const prev = (index - 1 + gallery.length) % gallery.length;
+    [next, prev].forEach(i => {
+      const img = new Image();
+      img.src = gallery[i].src;
+    });
+  }
+
+  // ── Open modal ───────────────────────────────────────────
+  function openModal(index) {
+    lastFocused = document.activeElement;
+    modal.classList.remove('is-closing');
+    modal.hidden = false;
+    modal.style.pointerEvents = 'auto';
+    document.body.classList.add('gallery-open');
+    renderImage(index);
+    requestAnimationFrame(() => UI.closeBtn?.focus());
+  }
+
+  // ── Close modal ──────────────────────────────────────────
+  function closeModal() {
+    modal.classList.add('is-closing');
+    setTimeout(() => {
+      modal.hidden = true;
+      modal.classList.remove('is-closing');
+      document.body.classList.remove('gallery-open');
+      if (lastFocused) lastFocused.focus();
+      lastFocused = null;
+    }, 260);
+  }
+
+  // ── Open fullscreen overlay (all images grid) ────────────
+  function openOverlay() {
+    if (!overlay || !goGrid) return;
+
+    // Build/refresh grid
+    goGrid.innerHTML = gallery.map((item, i) => `
+      <button type="button" class="go-item" data-index="${i}" aria-label="View ${item.caption}">
+        <img src="${item.thumb}" alt="${item.alt}" loading="lazy">
+        <span class="go-item-label">${item.caption}</span>
+      </button>
+    `).join('');
+
+    // Bind clicks on each grid item
+    qsa('.go-item', goGrid).forEach(item => {
+      on(item, 'click', () => {
+        const idx = parseInt(item.dataset.index, 10);
+        closeOverlay();
+        // Wait for overlay close animation, then open modal
+        setTimeout(() => openModal(idx), 100);
+      });
+    });
+
+    lastFocused = document.activeElement;
+    overlay.classList.remove('is-closing');
+    overlay.hidden = false;
+    document.body.classList.add('gallery-open');
+  }
+
+  function closeOverlay() {
+    if (!overlay) return;
+    overlay.classList.add('is-closing');
+    setTimeout(() => {
+      overlay.hidden = true;
+      overlay.classList.remove('is-closing');
+      document.body.classList.remove('gallery-open');
+    }, 260);
+  }
+
+  // ── Navigation ───────────────────────────────────────────
+  function next() { renderImage(currentIndex + 1); }
+  function prev() { renderImage(currentIndex - 1); }
+
+  // ── Bind tile clicks ─────────────────────────────────────
+  tiles.forEach(tile => {
+    on(tile, 'click', () => {
+      const idx = parseInt(tile.dataset.galleryIndex, 10);
+      openModal(idx);
+    });
+  });
+
+  // ── Modal controls ───────────────────────────────────────
+  on(UI.closeBtn, 'click', closeModal);
+  on(UI.nextBtn,  'click', next);
+  on(UI.prevBtn,  'click', prev);
+
+  // Click outside modal content to close
+  on(modal, 'click', e => {
+    if (e.target === modal) closeModal();
+  });
+
+  // ── View More Work button → fullscreen overlay ──────────
+  if (viewMore) on(viewMore, 'click', openOverlay);
+
+  // ── Overlay close button ─────────────────────────────────
+  const goCloseBtn = qs('#goClose');
+  on(goCloseBtn, 'click', closeOverlay);
+
+  // ── Keyboard navigation ──────────────────────────────────
+  on(document, 'keydown', e => {
+    if (!modal.hidden) {
+      if (e.key === 'Escape')      closeModal();
+      else if (e.key === 'ArrowRight') next();
+      else if (e.key === 'ArrowLeft')  prev();
+    } else if (overlay && !overlay.hidden) {
+      if (e.key === 'Escape') closeOverlay();
+    }
+  });
+}
+// ===== END: BENTO GALLERY =====
+
 function init() {
   // Core UI
   initNavScroll();
@@ -817,6 +1005,9 @@ function init() {
   initFunnel();
   initForm();
   initFAQ();
+
+  // ===== NEW: Featured Work / Bento Gallery =====
+  initBentoGallery();
 
   // Helpers
   initSmoothScroll();
