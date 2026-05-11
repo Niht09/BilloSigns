@@ -1,4 +1,4 @@
-/* Billo Signs WIP Build — script-ver2.js */
+/* Billo Signs WIP Build — script-ver3.js */
 /**
  * ═══════════════════════════════════════════════════════════════
  * BILLO SIGNS & GRAPHICS — script.js
@@ -993,6 +993,213 @@ function initBentoGallery() {
 // ===== END: BENTO GALLERY =====
 
 /* ─────────────────────────────────────────────────────────────
+   ===== NEW: VANILLA HERO SHUFFLE GRID (ver3) =====
+   4×4 grid of 16 signage-related image tiles that auto-shuffles
+   every 3 seconds. Smooth fade/scale transitions, no layout shift.
+   - Respects prefers-reduced-motion (no auto-shuffle)
+   - Pauses when tab is hidden
+   - Hidden on mobile via CSS (max-width: 1024px)
+   - Image data is a simple array — swap src/alt for real photos later.
+───────────────────────────────────────────────────────────── */
+
+// WIP: temporary Unsplash references — replace with real Billo project images later.
+// Each entry needs only { src, alt }. The shuffle algorithm fills 16 tiles
+// (cycles through this array if fewer than 16 entries provided).
+window.HERO_SHUFFLE_IMAGES = [
+  { src: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?auto=format&fit=crop&w=500&q=75',
+    alt: 'Storefront signage visual reference for Edmonton business' },
+  { src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=75',
+    alt: 'Vehicle decal visual reference for trades company branding' },
+  { src: 'https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?auto=format&fit=crop&w=500&q=75',
+    alt: 'Window graphics visual reference for retail storefront' },
+  { src: 'https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=500&q=75',
+    alt: 'Lightbox sign visual reference for plaza tenant' },
+  { src: 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=500&q=75',
+    alt: 'Channel letter sign visual reference for Alberta storefront' },
+  { src: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=75',
+    alt: 'Interior office branding visual reference' },
+  { src: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=500&q=75',
+    alt: 'Print design and large format visual reference' },
+  { src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=500&q=75',
+    alt: 'Restaurant storefront signage visual reference' },
+  { src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=500&q=75',
+    alt: 'Salon storefront signage visual reference' },
+  { src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=500&q=75',
+    alt: 'Restaurant interior signage and large format print visual reference' },
+  { src: 'https://images.unsplash.com/photo-1556745753-b2904692b3cd?auto=format&fit=crop&w=500&q=75',
+    alt: 'Channel letter storefront signage visual reference' },
+  { src: 'https://images.unsplash.com/photo-1572177812156-58036aae439c?auto=format&fit=crop&w=500&q=75',
+    alt: 'Illuminated business sign visual reference' },
+  { src: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=500&q=75',
+    alt: 'Modern storefront signage visual reference' },
+  { src: 'https://images.unsplash.com/photo-1571260899304-425eee4c7efc?auto=format&fit=crop&w=500&q=75',
+    alt: 'Commercial vehicle decal visual reference' },
+  { src: 'https://images.unsplash.com/photo-1573152958734-1922c188fba3?auto=format&fit=crop&w=500&q=75',
+    alt: 'Window graphics retail signage visual reference' },
+  { src: 'https://images.unsplash.com/photo-1577705998148-6da4f3963bc8?auto=format&fit=crop&w=500&q=75',
+    alt: 'Office interior signage visual reference' }
+];
+
+function initShuffleGrid() {
+  const grid = qs('#heroShuffleGrid');
+  if (!grid) return;
+
+  const images = window.HERO_SHUFFLE_IMAGES || [];
+  if (images.length === 0) return;
+
+  const TILE_COUNT = 16;
+  const SHUFFLE_INTERVAL = 3000;
+
+  // Build pool of 16 entries (loop array if shorter than 16)
+  function buildInitialPool() {
+    const pool = [];
+    for (let i = 0; i < TILE_COUNT; i++) {
+      pool.push(images[i % images.length]);
+    }
+    return shuffle(pool.slice());
+  }
+
+  // Fisher-Yates shuffle
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // Build initial tiles
+  let currentPool = buildInitialPool();
+  grid.innerHTML = '';
+
+  currentPool.forEach((img, i) => {
+    const tile = document.createElement('div');
+    tile.className = 'shuffle-tile';
+    tile.dataset.index = i;
+    const imgEl = document.createElement('img');
+    imgEl.src = img.src;
+    imgEl.alt = img.alt;
+    imgEl.loading = 'lazy';
+    imgEl.decoding = 'async';
+    tile.appendChild(imgEl);
+    grid.appendChild(tile);
+  });
+
+  // ── Reduced-motion preference → static, no auto-shuffle ──
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (reducedMotion.matches) return;
+
+  // ── Shuffle cycle ───────────────────────────────────────
+  let timer = null;
+  let isVisible = !document.hidden;
+
+  function shuffleCycle() {
+    // Skip cycle if page is hidden (saves CPU)
+    if (!isVisible) return;
+
+    // Pick two random tile indices to swap (subtle, not full reshuffle every time)
+    // ─ but every 4th cycle, do a bigger reshuffle for variety
+    const tiles = qsa('.shuffle-tile', grid);
+    if (tiles.length < 2) return;
+
+    const swapsThisCycle = Math.random() < 0.25 ? 6 : 2; // 25% chance of bigger reshuffle
+
+    // Fade out chosen tiles
+    const swapIndices = [];
+    for (let s = 0; s < swapsThisCycle; s++) {
+      swapIndices.push(Math.floor(Math.random() * tiles.length));
+    }
+    swapIndices.forEach(i => tiles[i].classList.add('is-shuffling'));
+
+    setTimeout(() => {
+      // Swap image data in pairs
+      for (let i = 0; i < swapIndices.length - 1; i += 2) {
+        const a = tiles[swapIndices[i]].querySelector('img');
+        const b = tiles[swapIndices[i + 1]].querySelector('img');
+        if (!a || !b) continue;
+        const tmpSrc = a.src, tmpAlt = a.alt;
+        a.src = b.src; a.alt = b.alt;
+        b.src = tmpSrc; b.alt = tmpAlt;
+      }
+      // Also occasionally bring in a fresh image from the pool to one of the swapped tiles
+      if (swapIndices.length > 0 && Math.random() < 0.5) {
+        const target = tiles[swapIndices[0]].querySelector('img');
+        const fresh = images[Math.floor(Math.random() * images.length)];
+        if (target) { target.src = fresh.src; target.alt = fresh.alt; }
+      }
+      // Fade back in
+      swapIndices.forEach(i => tiles[i].classList.remove('is-shuffling'));
+    }, 600);
+  }
+
+  function start() {
+    if (timer) return;
+    timer = setInterval(shuffleCycle, SHUFFLE_INTERVAL);
+  }
+  function stop() {
+    if (timer) clearInterval(timer);
+    timer = null;
+  }
+
+  // Pause when tab hidden
+  on(document, 'visibilitychange', () => {
+    isVisible = !document.hidden;
+    if (isVisible) start(); else stop();
+  });
+
+  // React if reduced-motion preference changes mid-session
+  reducedMotion.addEventListener?.('change', e => {
+    if (e.matches) stop(); else start();
+  });
+
+  start();
+}
+// ===== END: HERO SHUFFLE GRID =====
+
+/* ─────────────────────────────────────────────────────────────
+   ===== NEW: MOBILE SECTION ORDER (ver3) =====
+   On viewports ≤768px, move .proof-bar to AFTER the gallery section
+   so the visual order becomes: Hero → Gallery → Proof Bar.
+   On larger viewports, restore original DOM order.
+───────────────────────────────────────────────────────────── */
+
+function initMobileSectionOrder() {
+  const proofBar = qs('.proof-bar');
+  const gallery  = qs('.section.section-dark.gallery-section');
+  if (!proofBar || !gallery) return;
+
+  // Save reference to the original next sibling so we can put it back
+  const originalNextSibling = proofBar.nextElementSibling;
+  const originalParent = proofBar.parentElement;
+
+  const mql = window.matchMedia('(max-width: 768px)');
+  let currentState = null; // 'mobile' | 'desktop'
+
+  function applyOrder() {
+    const wantsMobile = mql.matches;
+    if (wantsMobile && currentState !== 'mobile') {
+      // Move proof bar to AFTER the gallery
+      gallery.parentNode.insertBefore(proofBar, gallery.nextSibling);
+      currentState = 'mobile';
+    } else if (!wantsMobile && currentState !== 'desktop') {
+      // Restore to original location
+      if (originalNextSibling && originalNextSibling.parentNode === originalParent) {
+        originalParent.insertBefore(proofBar, originalNextSibling);
+      } else {
+        originalParent.appendChild(proofBar);
+      }
+      currentState = 'desktop';
+    }
+  }
+
+  applyOrder();
+  // Listen for breakpoint crossings (Safari support: addListener fallback)
+  if (mql.addEventListener) mql.addEventListener('change', applyOrder);
+  else if (mql.addListener) mql.addListener(applyOrder);
+}
+// ===== END: MOBILE SECTION ORDER =====
+
+/* ─────────────────────────────────────────────────────────────
    ===== NEW: FLOATING WHATSAPP BUTTON =====
    Single global floating button. Hides during:
    - body.gallery-open (modal/overlay open)
@@ -1054,6 +1261,12 @@ function init() {
 
   // ===== NEW: Featured Work / Bento Gallery =====
   initBentoGallery();
+
+  // ===== NEW (ver3): Vanilla Hero Shuffle Grid =====
+  initShuffleGrid();
+
+  // ===== NEW (ver3): Mobile section order (proof bar after gallery on mobile) =====
+  initMobileSectionOrder();
 
   // ===== NEW: Global Floating WhatsApp Button =====
   initFloatingWhatsApp();
