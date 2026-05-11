@@ -1,4 +1,4 @@
-/* Billo Signs WIP Build — styles-ver2.css */
+/* Billo Signs WIP Build — styles-ver3.css */
 /* ═══════════════════════════════════════════════════════════════
    BILLO SIGNS & GRAPHICS — styles.css
    Design System: Dark premium, 8px grid, Montserrat + DM Sans
@@ -2567,7 +2567,8 @@ textarea {
 }
 
 /* ───────────────────────────────────────────────────────────────
-   ===== NEW: HERO COLLAGE (Stage A) =====
+   ===== NEW: VANILLA HERO SHUFFLE GRID (ver3) =====
+   Replaces previous static 4-tile collage with 4×4 auto-shuffle grid
 ─────────────────────────────────────────────────────────────── */
 
 .hero-inner--split {
@@ -2577,57 +2578,52 @@ textarea {
   align-items: center;
 }
 
-/* Hero collage — 4 image asymmetric grid */
-.hero-collage {
+.hero-shuffle-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: var(--sp-2);
-  height: 540px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+  width: 100%;
+  height: 460px;
   position: relative;
-}
-
-.hero-collage-tile {
-  margin: 0;
   border-radius: var(--r-md);
   overflow: hidden;
+}
+
+.shuffle-tile {
   position: relative;
-  border: 1px solid var(--clr-border2);
-  transition: transform var(--t-slow) var(--ease), border-color var(--t-base);
+  overflow: hidden;
+  border-radius: var(--r-sm, 8px);
+  background: var(--clr-bg3);
+  border: 1px solid var(--clr-border);
+  transition: opacity 600ms cubic-bezier(.65,.05,.36,1),
+              transform 600ms cubic-bezier(.65,.05,.36,1);
+  will-change: transform, opacity;
 }
 
-.hero-collage-tile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(11,13,18,0) 50%, rgba(11,13,18,.45) 100%);
-  pointer-events: none;
-}
-
-.hero-collage-tile img {
+.shuffle-tile img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform var(--t-slow) var(--ease);
 }
 
-.hero-collage-tile:hover img { transform: scale(1.04); }
-.hero-collage-tile:hover { border-color: var(--clr-gold-border); }
-
-/* Asymmetric layout: A is large left-spanning, B C D stack right */
-.hero-collage-tile--a { grid-column: 1; grid-row: 1 / 4; animation: heroFloat 6s ease-in-out infinite; }
-.hero-collage-tile--b { grid-column: 2; grid-row: 1; animation: heroFloat 7s ease-in-out infinite .8s; }
-.hero-collage-tile--c { grid-column: 2; grid-row: 2; animation: heroFloat 8s ease-in-out infinite 1.6s; }
-.hero-collage-tile--d { grid-column: 2; grid-row: 3; animation: heroFloat 6.5s ease-in-out infinite 2.4s; }
-
-@keyframes heroFloat {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+.shuffle-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(11,13,18,0) 60%, rgba(11,13,18,.35) 100%);
+  pointer-events: none;
 }
 
-/* Hero mobile preview — only shows on mobile */
-.hero-mobile-preview { display: none; }
+/* Shuffle state — applied just before swap to fade out, removed after src changes */
+.shuffle-tile.is-shuffling {
+  opacity: 0;
+  transform: scale(.96);
+}
+
+/* Mobile hero preview kept hidden at all screen sizes (per ver3) */
+.hero-mobile-preview { display: none !important; }
 
 /* ───────────────────────────────────────────────────────────────
    ===== NEW: WHY DIFFERENTIATORS (Stage B) =====
@@ -3153,14 +3149,8 @@ body.gallery-open { overflow: hidden; }
 
 @media (max-width: 1024px) {
   .hero-inner--split { grid-template-columns: 1fr; gap: var(--sp-5); }
-  .hero-collage { display: none; }
-  .hero-mobile-preview {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--sp-2);
-    margin: var(--sp-4) 0 var(--sp-3);
-    max-width: 380px;
-  }
+  .hero-shuffle-grid { display: none; } /* UPDATED ver3: hide on mobile/tablet to keep CTAs above the fold */
+  /* hero-mobile-preview intentionally NOT re-shown here (ver3) */
   .hero-mp-tile {
     aspect-ratio: 4 / 3;
     border-radius: var(--r-md);
