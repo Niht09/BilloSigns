@@ -1,4 +1,4 @@
-/* Billo Signs WIP Build — styles-ver1.css */
+/* Billo Signs WIP Build — styles-ver2.css */
 /* ═══════════════════════════════════════════════════════════════
    BILLO SIGNS & GRAPHICS — styles.css
    Design System: Dark premium, 8px grid, Montserrat + DM Sans
@@ -3199,6 +3199,101 @@ body.gallery-open { overflow: hidden; }
   .go-grid { grid-template-columns: 1fr; }
   .services-grid--imaged { grid-template-columns: 1fr !important; }
   .gallery-cta-row .btn { width: 100%; }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ===== NEW: GLOBAL FLOATING WHATSAPP BUTTON =====
+─────────────────────────────────────────────────────────────── */
+
+.floating-wa {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  background: #25D366;
+  color: #FFFFFF;
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: -.2px;
+  text-decoration: none;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(37,211,102,.35), 0 4px 12px rgba(0,0,0,.25);
+  z-index: 500;
+  transition: transform var(--t-base) var(--ease),
+              box-shadow var(--t-base) var(--ease),
+              opacity var(--t-base) var(--ease),
+              visibility var(--t-base) var(--ease);
+  min-height: 56px;
+  cursor: pointer;
+}
+
+.floating-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(37,211,102,.45), 0 6px 18px rgba(0,0,0,.3);
+  background: #1FAE54;
+}
+
+.floating-wa:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 6px rgba(37,211,102,.4), 0 8px 24px rgba(37,211,102,.35);
+}
+
+.floating-wa-ico { flex-shrink: 0; }
+.floating-wa-label { white-space: nowrap; }
+
+/* Hide when gallery/modal open OR an input is focused on mobile */
+body.gallery-open .floating-wa,
+body.modal-open   .floating-wa,
+body.input-focused .floating-wa {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+/* Mobile: circular icon-only button, sits above sticky bar */
+@media (max-width: 768px) {
+  .floating-wa {
+    bottom: calc(var(--sticky-h, 60px) + 16px);
+    right: 16px;
+    padding: 0;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    justify-content: center;
+    gap: 0;
+  }
+  .floating-wa-label { display: none; }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   ===== NEW: FOOTER CALL BUTTON (replaces footer WhatsApp) =====
+─────────────────────────────────────────────────────────────── */
+
+.footer-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: var(--clr-bg3);
+  border: 1px solid var(--clr-border2);
+  color: var(--clr-white);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--r-md);
+  transition: border-color var(--t-base), background var(--t-base);
+}
+
+.footer-call:hover {
+  background: var(--clr-bg4);
+  border-color: var(--clr-gold-border);
+  color: var(--clr-gold);
 }
 
 /* ───────────────────────────────────────────────────────────────
