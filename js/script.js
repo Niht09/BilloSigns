@@ -1,4 +1,4 @@
-/* Billo Signs WIP Build — script-ver1.js */
+/* Billo Signs WIP Build — script-ver2.js */
 /**
  * ═══════════════════════════════════════════════════════════════
  * BILLO SIGNS & GRAPHICS — script.js
@@ -992,6 +992,51 @@ function initBentoGallery() {
 }
 // ===== END: BENTO GALLERY =====
 
+/* ─────────────────────────────────────────────────────────────
+   ===== NEW: FLOATING WHATSAPP BUTTON =====
+   Single global floating button. Hides during:
+   - body.gallery-open (modal/overlay open)
+   - body.modal-open (any future modal)
+   - body.input-focused (mobile: input/textarea focused)
+───────────────────────────────────────────────────────────── */
+
+function initFloatingWhatsApp() {
+  const fab = qs('#floatingWA');
+  if (!fab) return;
+
+  // ── Mobile input focus handling ──────────────────────────
+  // Only apply on touch devices — desktop users don't have the same overlap concern
+  const isTouch = window.matchMedia('(max-width: 768px)').matches
+                  || ('ontouchstart' in window);
+
+  if (isTouch) {
+    const inputs = qsa('input, textarea');
+
+    inputs.forEach(input => {
+      on(input, 'focus', () => {
+        document.body.classList.add('input-focused');
+      });
+      on(input, 'blur', () => {
+        // Small delay so rapid tab-between-fields doesn't flash the button
+        setTimeout(() => {
+          // Only remove if no other input is focused
+          const stillFocused = document.activeElement
+            && (document.activeElement.tagName === 'INPUT'
+             || document.activeElement.tagName === 'TEXTAREA');
+          if (!stillFocused) {
+            document.body.classList.remove('input-focused');
+          }
+        }, 80);
+      });
+    });
+  }
+
+  // ── GA4 tracking — fires existing whatsapp_click event ────
+  // (Already handled by initCTATracking which targets a[href*="wa.me"]
+  // — the floating button matches that selector, so no duplicate code needed)
+}
+// ===== END: FLOATING WHATSAPP BUTTON =====
+
 function init() {
   // Core UI
   initNavScroll();
@@ -1009,6 +1054,9 @@ function init() {
 
   // ===== NEW: Featured Work / Bento Gallery =====
   initBentoGallery();
+
+  // ===== NEW: Global Floating WhatsApp Button =====
+  initFloatingWhatsApp();
 
   // Helpers
   initSmoothScroll();
